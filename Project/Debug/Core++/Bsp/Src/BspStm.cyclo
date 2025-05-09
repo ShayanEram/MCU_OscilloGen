@@ -1,0 +1,23 @@
+../Core++/Bsp/Inc/IBsp.hpp:16:7:constexpr Bsp::Bsp()	1
+../Core++/Bsp/Inc/IBsp.hpp:54:10:constexpr Bsp::~Bsp()	1
+../Core++/Bsp/Inc/IBsp.hpp:54:10:virtual constexpr Bsp::~Bsp()	1
+../Core++/Bsp/Src/BspStm.cpp:10:1:BspStm::BspStm()	1
+../Core++/Bsp/Src/BspStm.cpp:15:1:BspStm::~BspStm()	1
+../Core++/Bsp/Src/BspStm.cpp:15:1:virtual BspStm::~BspStm()	1
+../Core++/Bsp/Src/BspStm.cpp:21:6:virtual void BspStm::writeGPIO(bool)	1
+../Core++/Bsp/Src/BspStm.cpp:28:6:virtual void BspStm::readGPIO()	1
+../Core++/Bsp/Src/BspStm.cpp:33:6:virtual void BspStm::startADC()	1
+../Core++/Bsp/Src/BspStm.cpp:38:6:virtual void BspStm::stopADC()	1
+../Core++/Bsp/Src/BspStm.cpp:42:10:virtual uint16_t BspStm::readADC()	0
+../Core++/Bsp/Src/BspStm.cpp:48:6:virtual void BspStm::startDAC()	1
+../Core++/Bsp/Src/BspStm.cpp:52:6:virtual void BspStm::stopDAC()	1
+../Core++/Bsp/Src/BspStm.cpp:56:6:virtual void BspStm::writeDAC(uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:61:6:virtual void BspStm::startPWM()	1
+../Core++/Bsp/Src/BspStm.cpp:65:6:virtual void BspStm::stopPWM()	1
+../Core++/Bsp/Src/BspStm.cpp:70:6:virtual void BspStm::sendUART(uint8_t)	1
+../Core++/Bsp/Src/BspStm.cpp:75:9:virtual uint8_t BspStm::receiveUART()	0
+../Core++/Bsp/Src/BspStm.cpp:81:9:virtual uint8_t BspStm::sendSPI(uint8_t)	0
+../Core++/Bsp/Src/BspStm.cpp:88:9:virtual uint8_t BspStm::receiveSPI()	0
+../Core++/Bsp/Src/BspStm.cpp:94:6:virtual void BspStm::sendI2C(uint8_t, uint8_t)	1
+../Core++/Bsp/Src/BspStm.cpp:102:9:virtual uint8_t BspStm::receiveI2C(uint8_t)	0
+../Core++/Bsp/Src/BspStm.cpp:112:6:virtual void BspStm::delay(uint32_t)	2

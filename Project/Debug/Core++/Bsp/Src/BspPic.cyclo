@@ -1,0 +1,6 @@
+../Core++/Bsp/Inc/IBsp.hpp:16:7:constexpr Bsp::Bsp()	1
+../Core++/Bsp/Inc/IBsp.hpp:54:10:constexpr Bsp::~Bsp()	1
+../Core++/Bsp/Inc/IBsp.hpp:54:10:virtual constexpr Bsp::~Bsp()	1
+../Core++/Bsp/Src/BspPic.cpp:10:1:BspPic::BspPic()	1
+../Core++/Bsp/Src/BspPic.cpp:15:1:BspPic::~BspPic()	1
+../Core++/Bsp/Src/BspPic.cpp:15:1:virtual BspPic::~BspPic()	1
