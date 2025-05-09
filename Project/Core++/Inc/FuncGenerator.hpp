@@ -8,6 +8,10 @@
 #ifndef INC_FUNCGENERATOR_HPP_
 #define INC_FUNCGENERATOR_HPP_
 
+#include <arm_math.h>
+#define ARM_MATH_CM7
+
+
 class Signal final {
 public:
 	explicit Signal() = default;

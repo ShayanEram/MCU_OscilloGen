@@ -1,4 +1,0 @@
-../Core++/Src/Signal.cpp:10:6:void Signal::calculateSine()	1
-../Core++/Src/Signal.cpp:11:6:void Signal::calculateSquare()	1
-../Core++/Src/Signal.cpp:12:6:void Signal::calculateSaw()	1
-../Core++/Src/Signal.cpp:13:6:void Signal::calculateTriangle()	1

@@ -5,29 +5,44 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../Core++/Src/AdcExtern.cpp \
+../Core++/Src/Bootloader.cpp \
 ../Core++/Src/DacExtern.cpp \
+../Core++/Src/FuncGenerator.cpp \
+../Core++/Src/Lcd.cpp \
 ../Core++/Src/MainCpp.cpp \
-../Core++/Src/Signal.cpp 
+../Core++/Src/Oscilloscope.cpp \
+../Core++/Src/SerialConnection.cpp 
 
 OBJS += \
+./Core++/Src/AdcExtern.o \
+./Core++/Src/Bootloader.o \
 ./Core++/Src/DacExtern.o \
+./Core++/Src/FuncGenerator.o \
+./Core++/Src/Lcd.o \
 ./Core++/Src/MainCpp.o \
-./Core++/Src/Signal.o 
+./Core++/Src/Oscilloscope.o \
+./Core++/Src/SerialConnection.o 
 
 CPP_DEPS += \
+./Core++/Src/AdcExtern.d \
+./Core++/Src/Bootloader.d \
 ./Core++/Src/DacExtern.d \
+./Core++/Src/FuncGenerator.d \
+./Core++/Src/Lcd.d \
 ./Core++/Src/MainCpp.d \
-./Core++/Src/Signal.d 
+./Core++/Src/Oscilloscope.d \
+./Core++/Src/SerialConnection.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
 Core++/Src/%.o Core++/Src/%.su Core++/Src/%.cyclo: ../Core++/Src/%.cpp Core++/Src/subdir.mk
-	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++20 -g3 -DDEBUG -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -c -I../Core/Inc -I../Core++/Inc -I../Core++/Bsp/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m7 -std=gnu++20 -g3 -DDEBUG -DUSE_PWR_LDO_SUPPLY -DUSE_HAL_DRIVER -DSTM32H723xx -c -I../Core/Inc -I../Core++/Inc -I../Core++/Bsp/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc -I../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I../Drivers/CMSIS/Include -I../Middlewares/ST/ARM/DSP/Inc -I../USB_DEVICE/App -I../USB_DEVICE/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv5-d16 -mfloat-abi=hard -mthumb -o "$@"
 
 clean: clean-Core-2b--2b--2f-Src
 
 clean-Core-2b--2b--2f-Src:
-	-$(RM) ./Core++/Src/DacExtern.cyclo ./Core++/Src/DacExtern.d ./Core++/Src/DacExtern.o ./Core++/Src/DacExtern.su ./Core++/Src/MainCpp.cyclo ./Core++/Src/MainCpp.d ./Core++/Src/MainCpp.o ./Core++/Src/MainCpp.su ./Core++/Src/Signal.cyclo ./Core++/Src/Signal.d ./Core++/Src/Signal.o ./Core++/Src/Signal.su
+	-$(RM) ./Core++/Src/AdcExtern.cyclo ./Core++/Src/AdcExtern.d ./Core++/Src/AdcExtern.o ./Core++/Src/AdcExtern.su ./Core++/Src/Bootloader.cyclo ./Core++/Src/Bootloader.d ./Core++/Src/Bootloader.o ./Core++/Src/Bootloader.su ./Core++/Src/DacExtern.cyclo ./Core++/Src/DacExtern.d ./Core++/Src/DacExtern.o ./Core++/Src/DacExtern.su ./Core++/Src/FuncGenerator.cyclo ./Core++/Src/FuncGenerator.d ./Core++/Src/FuncGenerator.o ./Core++/Src/FuncGenerator.su ./Core++/Src/Lcd.cyclo ./Core++/Src/Lcd.d ./Core++/Src/Lcd.o ./Core++/Src/Lcd.su ./Core++/Src/MainCpp.cyclo ./Core++/Src/MainCpp.d ./Core++/Src/MainCpp.o ./Core++/Src/MainCpp.su ./Core++/Src/Oscilloscope.cyclo ./Core++/Src/Oscilloscope.d ./Core++/Src/Oscilloscope.o ./Core++/Src/Oscilloscope.su ./Core++/Src/SerialConnection.cyclo ./Core++/Src/SerialConnection.d ./Core++/Src/SerialConnection.o ./Core++/Src/SerialConnection.su
 
 .PHONY: clean-Core-2b--2b--2f-Src
 

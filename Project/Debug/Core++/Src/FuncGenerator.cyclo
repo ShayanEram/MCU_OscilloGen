@@ -1,0 +1,4 @@
+../Core++/Src/FuncGenerator.cpp:10:6:void Signal::calculateSine()	1
+../Core++/Src/FuncGenerator.cpp:11:6:void Signal::calculateSquare()	1
+../Core++/Src/FuncGenerator.cpp:12:6:void Signal::calculateSaw()	1
+../Core++/Src/FuncGenerator.cpp:13:6:void Signal::calculateTriangle()	1

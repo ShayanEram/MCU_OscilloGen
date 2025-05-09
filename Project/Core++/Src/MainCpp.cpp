@@ -3,7 +3,6 @@
 
 #include "BspStm.hpp"
 
-
 #define EXTERN_ADC
 #define EXTERN_DAC
 
