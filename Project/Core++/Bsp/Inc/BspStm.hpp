@@ -10,10 +10,10 @@
 
 #include "IBsp.hpp"
 
-class BspStm: public Bsp {
+class BspStm final : public Bsp {
 public:
-	BspStm();
-	virtual ~BspStm();
+	explicit BspStm() = default;
+	~BspStm() = default;
 
 #ifdef STM
 	/* GPIO */

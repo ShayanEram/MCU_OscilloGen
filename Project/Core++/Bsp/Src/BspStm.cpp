@@ -7,15 +7,6 @@
 
 #include "BspStm.hpp"
 
-BspStm::BspStm() {
-	// TODO Auto-generated constructor stub
-
-}
-
-BspStm::~BspStm() {
-	// TODO Auto-generated destructor stub
-}
-
 #ifdef STM
 /* GPIO */
 void BspStm::writeGPIO(bool state) {

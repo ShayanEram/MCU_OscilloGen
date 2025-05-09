@@ -14,10 +14,10 @@
 #include <xc.h>  // Include PIC MCU registers
 #endif
 
-class BspPic : public Bsp {
+class BspPic final : public Bsp {
 public:
-	BspPic();
-	virtual ~BspPic();
+	explicit BspPic() = default;
+	~BspPic() = default;
 
 #ifdef PIC
 	/* GPIO */

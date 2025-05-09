@@ -7,15 +7,6 @@
 
 #include "BspPic.hpp"
 
-BspPic::BspPic() {
-	// TODO Auto-generated constructor stub
-
-}
-
-BspPic::~BspPic() {
-	// TODO Auto-generated destructor stub
-}
-
 #ifdef PIC
 /* GPIO */
 void BspPic::writeGPIO(bool state) {

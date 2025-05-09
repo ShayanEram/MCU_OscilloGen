@@ -5,13 +5,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Core++/Src/MainCpp.cpp 
+../Core++/Src/DacExtern.cpp \
+../Core++/Src/MainCpp.cpp \
+../Core++/Src/Signal.cpp 
 
 OBJS += \
-./Core++/Src/MainCpp.o 
+./Core++/Src/DacExtern.o \
+./Core++/Src/MainCpp.o \
+./Core++/Src/Signal.o 
 
 CPP_DEPS += \
-./Core++/Src/MainCpp.d 
+./Core++/Src/DacExtern.d \
+./Core++/Src/MainCpp.d \
+./Core++/Src/Signal.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +27,7 @@ Core++/Src/%.o Core++/Src/%.su Core++/Src/%.cyclo: ../Core++/Src/%.cpp Core++/Sr
 clean: clean-Core-2b--2b--2f-Src
 
 clean-Core-2b--2b--2f-Src:
-	-$(RM) ./Core++/Src/MainCpp.cyclo ./Core++/Src/MainCpp.d ./Core++/Src/MainCpp.o ./Core++/Src/MainCpp.su
+	-$(RM) ./Core++/Src/DacExtern.cyclo ./Core++/Src/DacExtern.d ./Core++/Src/DacExtern.o ./Core++/Src/DacExtern.su ./Core++/Src/MainCpp.cyclo ./Core++/Src/MainCpp.d ./Core++/Src/MainCpp.o ./Core++/Src/MainCpp.su ./Core++/Src/Signal.cyclo ./Core++/Src/Signal.d ./Core++/Src/Signal.o ./Core++/Src/Signal.su
 
 .PHONY: clean-Core-2b--2b--2f-Src
 
