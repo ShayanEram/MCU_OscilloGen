@@ -8,6 +8,10 @@
 #ifndef INC_SERIALCONNECTION_HPP_
 #define INC_SERIALCONNECTION_HPP_
 
+#include "BspStm.hpp"
+#include <cstdint>
+
+
 
 //usb
 

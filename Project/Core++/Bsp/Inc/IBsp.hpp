@@ -9,14 +9,17 @@
 #define BSP_INC_IBSP_HPP_
 
 #include <cstdint>
-
-#define STM
-//#define PIC
+#include <stdio.h>
+#include <iostream>
 
 class Bsp
 {
+public:
+	virtual ~Bsp() = default;
+
 protected:
 
+#ifdef IBSP
 	/*GPIO*/
 	virtual void writeGPIO(bool state) = 0;
 	virtual void readGPIO() = 0;
@@ -50,8 +53,8 @@ protected:
 	/*DELAY*/
 	virtual void delay(uint32_t Delay) = 0;
 
-public:
-	virtual ~Bsp() = default;
+#endif
+
 
 };
 

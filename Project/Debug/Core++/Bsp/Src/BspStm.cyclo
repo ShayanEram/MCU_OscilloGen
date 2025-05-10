@@ -1,21 +1,41 @@
-../Core++/Bsp/Src/BspStm.cpp:12:6:virtual void BspStm::writeGPIO(bool)	1
-../Core++/Bsp/Src/BspStm.cpp:19:6:virtual void BspStm::readGPIO()	1
-../Core++/Bsp/Src/BspStm.cpp:24:6:virtual void BspStm::startADC()	1
-../Core++/Bsp/Src/BspStm.cpp:29:6:virtual void BspStm::stopADC()	1
-../Core++/Bsp/Src/BspStm.cpp:33:10:virtual uint16_t BspStm::readADC()	0
-../Core++/Bsp/Src/BspStm.cpp:39:6:virtual void BspStm::startDAC()	1
-../Core++/Bsp/Src/BspStm.cpp:43:6:virtual void BspStm::stopDAC()	1
-../Core++/Bsp/Src/BspStm.cpp:47:6:virtual void BspStm::writeDAC(uint16_t)	1
-../Core++/Bsp/Src/BspStm.cpp:52:6:virtual void BspStm::startPWM()	1
-../Core++/Bsp/Src/BspStm.cpp:56:6:virtual void BspStm::stopPWM()	1
-../Core++/Bsp/Src/BspStm.cpp:61:6:virtual void BspStm::sendUART(uint8_t)	1
-../Core++/Bsp/Src/BspStm.cpp:66:9:virtual uint8_t BspStm::receiveUART()	0
-../Core++/Bsp/Src/BspStm.cpp:72:9:virtual uint8_t BspStm::sendSPI(uint8_t)	0
-../Core++/Bsp/Src/BspStm.cpp:79:9:virtual uint8_t BspStm::receiveSPI()	0
-../Core++/Bsp/Src/BspStm.cpp:85:6:virtual void BspStm::sendI2C(uint8_t, uint8_t)	1
-../Core++/Bsp/Src/BspStm.cpp:93:9:virtual uint8_t BspStm::receiveI2C(uint8_t)	0
-../Core++/Bsp/Src/BspStm.cpp:103:6:virtual void BspStm::delay(uint32_t)	2
-../Core++/Bsp/Inc/IBsp.hpp:54:10:constexpr Bsp::~Bsp()	1
-../Core++/Bsp/Inc/IBsp.hpp:54:10:virtual constexpr Bsp::~Bsp()	1
-../Core++/Bsp/Inc/BspStm.hpp:16:2:constexpr BspStm::~BspStm()	1
-../Core++/Bsp/Inc/BspStm.hpp:16:2:virtual constexpr BspStm::~BspStm()	1
+C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\arm-none-eabi\include\c++\13.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
+../Core++/Bsp/Src/BspStm.cpp:11:8:Status BspStm::pwmStart_IT(TIM_HandleTypeDef*, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:17:8:Status BspStm::pwmStop_IT(TIM_HandleTypeDef*, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:24:8:Status BspStm::pwmStart_DMA(TIM_HandleTypeDef*, uint32_t, const uint32_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:31:8:Status BspStm::pwmStop_DMA(TIM_HandleTypeDef*, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:38:8:Status BspStm::spiTransmit_IT(SPI_HandleTypeDef*, const uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:44:8:Status BspStm::spiReceive_IT(SPI_HandleTypeDef*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:50:8:Status BspStm::spiTransmitReceive_IT(SPI_HandleTypeDef*, const uint8_t*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:56:8:Status BspStm::spiTransmit_DMA(SPI_HandleTypeDef*, const uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:62:8:Status BspStm::spiReceive_DMA(SPI_HandleTypeDef*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:68:8:Status BspStm::spiTransmitReceive_DMA(SPI_HandleTypeDef*, const uint8_t*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:75:8:Status BspStm::gpioWrite(GPIO_TypeDef*, uint16_t, GPIO_PinState)	1
+../Core++/Bsp/Src/BspStm.cpp:81:8:Status BspStm::gpioRead(const GPIO_TypeDef*, uint16_t, GPIO_PinState)	2
+../Core++/Bsp/Src/BspStm.cpp:89:8:Status BspStm::gpioToggle(GPIO_TypeDef*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:97:8:Status BspStm::uartTransmit_IT(UART_HandleTypeDef*, const uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:103:8:Status BspStm::uartReceive_IT(UART_HandleTypeDef*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:109:8:Status BspStm::uartTransmit_DMA(UART_HandleTypeDef*, const uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:115:8:Status BspStm::uartReceive_DMA(UART_HandleTypeDef*, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:122:8:Status BspStm::usbTransmit(uint8_t*, uint16_t)	2
+../Core++/Bsp/Src/BspStm.cpp:133:8:Status BspStm::adcCalibrationStart(ADC_HandleTypeDef*, uint32_t, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:139:8:Status BspStm::adcStart_IT(ADC_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:145:8:Status BspStm::adcStop_IT(ADC_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:151:8:Status BspStm::adcStart_DMA(ADC_HandleTypeDef*, uint32_t*, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:157:8:Status BspStm::adcStopDMA(ADC_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:164:8:Status BspStm::timStart_IT(TIM_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:170:8:Status BspStm::timStop_IT(TIM_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:176:8:Status BspStm::timeStart_DMA(TIM_HandleTypeDef*, const uint32_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:182:8:Status BspStm::timeStopDMA(TIM_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:189:8:Status BspStm::dacStart_DMA(DAC_HandleTypeDef*, uint32_t, const uint32_t*, uint32_t, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:195:8:Status BspStm::dacStopDMA(DAC_HandleTypeDef*, uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:202:8:Status BspStm::i2cTransmit_Master_IT(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:208:8:Status BspStm::i2cReceive_Master_IT(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:214:8:Status BspStm::i2cTransmit_Master_DMA(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:220:8:Status BspStm::i2cReceive_Master_DMA(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
+../Core++/Bsp/Src/BspStm.cpp:227:8:Status BspStm::watchdogRefresh(IWDG_HandleTypeDef*)	1
+../Core++/Bsp/Src/BspStm.cpp:234:8:Status BspStm::cordicInit(CORDIC_HandleTypeDef*, bool)	2
+../Core++/Bsp/Src/BspStm.cpp:251:8:Status BspStm::cordicCalculate_DMA(CORDIC_HandleTypeDef*, const int32_t*, int32_t*, uint32_t, uint32_t)	2
+../Core++/Bsp/Src/BspStm.cpp:260:6:void BspStm::delay(uint32_t)	1
+../Core++/Bsp/Src/BspStm.cpp:267:8:Status BspStm::convertHALStatus(HAL_StatusTypeDef)	5
+../Core++/Bsp/Src/BspStm.cpp:284:8:Status BspStm::convertUSBStatus(USBD_StatusTypeDef)	5
+../Core++/Bsp/Src/BspStm.cpp:304:16:int _write(int, char*, int)	3

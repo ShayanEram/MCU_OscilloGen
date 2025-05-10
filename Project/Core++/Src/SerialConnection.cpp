@@ -4,7 +4,8 @@
  *  Created on: May 8, 2025
  *      Author: shaya
  */
+#include "SerialConnection.hpp"
 
-
+uint8_t UsbRxDataBuffer[USB_RX_BUFF_SIZE];
 
 

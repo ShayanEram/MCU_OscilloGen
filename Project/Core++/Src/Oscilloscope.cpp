@@ -5,6 +5,8 @@
  *      Author: shaya
  */
 
+#include "Oscilloscope.hpp"
+
 
 
 
