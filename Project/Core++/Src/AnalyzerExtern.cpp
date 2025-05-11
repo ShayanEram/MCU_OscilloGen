@@ -7,7 +7,7 @@
 
 #include "AnalyzerExtern.hpp"
 
-AnalyzerExt::AnalyzerExt(BspStm& bsp): _bsp(bsp){}
+AnalyzerExt::AnalyzerExt(Bsp& bsp): _bsp(bsp){}
 
 void AnalyzerExt::sendCommand(uint8_t command)
 {

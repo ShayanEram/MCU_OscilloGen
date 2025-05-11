@@ -7,7 +7,7 @@
 
 #include <FuncAnalyzer.hpp>
 
-FuncAnalyser::FuncAnalyser(BspStm& bsp) : _bsp(bsp) {}
+FuncAnalyser::FuncAnalyser(Bsp& bsp) : _bsp(bsp) {}
 
 void FuncAnalyser::startAnalysing()
 {

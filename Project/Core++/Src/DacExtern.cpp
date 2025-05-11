@@ -8,7 +8,7 @@
 #include "DacExtern.hpp"
 #include "arm_math.h"
 
-Dac::Dac(BspStm& bsp): _bsp(bsp){}
+Dac::Dac(Bsp& bsp): _bsp(bsp){}
 
 Status Dac::sendDataSPI(uint32_t data)
 {

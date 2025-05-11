@@ -8,7 +8,7 @@
 #ifndef INC_LCD_HPP_
 #define INC_LCD_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 #include <array>
 
 constexpr int16_t SLAVE_ADDRESS = 0x4E;
@@ -17,7 +17,7 @@ constexpr int16_t SLAVE_ADDRESS = 0x4E;
 class Lcd final
 {
 public:
-	explicit Lcd(BspStm& bsp, uint8_t address);
+	explicit Lcd(Bsp& bsp, uint8_t address);
 	~Lcd() = default;
 
     void init();
@@ -27,7 +27,7 @@ public:
     void sendChar(char ch);
 
 private:
-    BspStm& _bsp;
+    Bsp& _bsp;
 
 	static constexpr uint8_t LCD_CMD_FUNCTION_SET = 0x28;
 	static constexpr uint8_t LCD_CMD_DISPLAY_OFF = 0x08;

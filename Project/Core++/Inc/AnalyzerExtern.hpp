@@ -10,12 +10,12 @@
 #ifndef INC_ANALYZEREXTERN_HPP_
 #define INC_ANALYZEREXTERN_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 
 class AnalyzerExt
 {
 public:
-	explicit AnalyzerExt(BspStm& bsp);
+	explicit AnalyzerExt(Bsp& bsp);
 	~AnalyzerExt() = default;
 
 	uint8_t requestFFT();
@@ -25,7 +25,7 @@ public:
 	uint8_t requestWaveform();
 
 private:
-    BspStm& _bsp;
+    Bsp& _bsp;
     void sendCommand(uint8_t command);
     uint8_t receiveData();
 

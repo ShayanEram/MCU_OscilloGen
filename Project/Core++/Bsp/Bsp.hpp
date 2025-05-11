@@ -1,14 +1,19 @@
 /*
- * BspStm.hpp
+ * IBsp.hpp
  *
  *  Created on: May 8, 2025
  *      Author: shaya
  */
 
-#ifndef BSP_INC_BSPSTM_HPP_
-#define BSP_INC_BSPSTM_HPP_
+#ifndef BSP_INC_BSP_HPP_
+#define BSP_INC_BSP_HPP_
 
-#include <Bsp.hpp>
+#define ARM_MATH_CM7
+
+#include <cstdint>
+#include <stdio.h>
+#include <iostream>
+
 #include "main.h"
 #include "adc.h"
 #include "cordic.h"
@@ -32,11 +37,10 @@ enum class Status : uint8_t
 	TIMEOUT = 0x03
 };
 
-class BspStm final : public Bsp {
+class Bsp final {
 public:
-	explicit BspStm() = default;
-	~BspStm() = default;
-	void init() override;
+	explicit Bsp() = default;
+	~Bsp() = default;
 
 	//PWM-------------------------------------------------------------------------------------------------------------------------
 	Status pwmStart_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
@@ -106,4 +110,4 @@ private:
 
 };
 
-#endif /* BSP_INC_BSPSTM_HPP_ */
+#endif /* BSP_INC_BSP_HPP_ */

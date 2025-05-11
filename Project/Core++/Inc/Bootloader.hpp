@@ -8,7 +8,7 @@
 #ifndef INC_BOOTLOADER_HPP_
 #define INC_BOOTLOADER_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 
 class Bootloader {
 public:

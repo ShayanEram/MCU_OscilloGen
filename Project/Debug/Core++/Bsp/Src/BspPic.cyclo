@@ -1,6 +1,0 @@
-C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\arm-none-eabi\include\c++\13.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
-../Core++/Bsp/Src/BspPic.cpp:10:6:virtual void BspPic::init()	1
-../Core++/Bsp/Inc/Bsp.hpp:21:10:constexpr Bsp::~Bsp()	1
-../Core++/Bsp/Inc/Bsp.hpp:21:10:virtual constexpr Bsp::~Bsp()	1
-../Core++/Bsp/Inc/BspPic.hpp:16:2:constexpr BspPic::~BspPic()	1
-../Core++/Bsp/Inc/BspPic.hpp:16:2:virtual constexpr BspPic::~BspPic()	1

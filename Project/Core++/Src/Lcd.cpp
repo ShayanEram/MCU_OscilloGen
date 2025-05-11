@@ -8,7 +8,7 @@
 #include "Lcd.hpp"
 
 
-Lcd::Lcd(BspStm& bsp, uint8_t address) : _bsp(bsp), _address(address) {}
+Lcd::Lcd(Bsp& bsp, uint8_t address) : _bsp(bsp), _address(address) {}
 
 void Lcd::sendCommand(uint8_t cmd) {
     uint8_t upperNibble = cmd & 0xF0;

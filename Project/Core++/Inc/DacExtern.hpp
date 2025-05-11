@@ -10,11 +10,11 @@
 #ifndef INC_DACEXTERN_HPP_
 #define INC_DACEXTERN_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 
 class Dac final {
 public:
-    explicit Dac(BspStm& bsp);
+    explicit Dac(Bsp& bsp);
     ~Dac()= default;
 
     void DacTest();
@@ -25,7 +25,7 @@ public:
     void test();
 
 private:
-    BspStm& _bsp;
+    Bsp& _bsp;
     Status sendDataSPI(uint32_t data);
     uint8_t receiveStatusSPI();
 

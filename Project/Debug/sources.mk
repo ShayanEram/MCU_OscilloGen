@@ -40,7 +40,7 @@ CPP_DEPS :=
 SUBDIRS := \
 Core/Src \
 Core/Startup \
-Core++/Bsp/Src \
+Core++/Bsp \
 Core++/Src \
 Drivers/STM32H7xx_HAL_Driver/Src \
 Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Src \

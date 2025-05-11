@@ -1,5 +1,5 @@
 C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\arm-none-eabi\include\c++\13.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
-../Core++/Src/FuncAnalyser.cpp:10:1:FuncAnalyser::FuncAnalyser(BspStm&)	1
+../Core++/Src/FuncAnalyser.cpp:10:1:FuncAnalyser::FuncAnalyser(Bsp&)	1
 ../Core++/Src/FuncAnalyser.cpp:12:6:void FuncAnalyser::startAnalysing()	1
 ../Core++/Src/FuncAnalyser.cpp:17:11:float32_t FuncAnalyser::measurePeakVoltage()	2
 ../Core++/Src/FuncAnalyser.cpp:31:11:float32_t FuncAnalyser::measureRMSVoltage()	1

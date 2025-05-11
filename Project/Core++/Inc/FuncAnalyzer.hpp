@@ -8,7 +8,7 @@
 #ifndef INC_FUNCANALYZER_HPP_
 #define INC_FUNCANALYZER_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 #include "arm_math.h"
 #include <array>
 
@@ -16,7 +16,7 @@
 class FuncAnalyser
 {
 public:
-	explicit FuncAnalyser (BspStm& bsp);
+	explicit FuncAnalyser (Bsp& bsp);
 	~FuncAnalyser() = default;
 
 	void startAnalysing();
@@ -28,7 +28,7 @@ public:
     float32_t findMaxPeak();
 
 private:
-	BspStm& _bsp;
+	Bsp& _bsp;
 	static constexpr uint16_t ADC_BUF_SIZE = 4096;
 	std::array<uint16_t, ADC_BUF_SIZE>adc_buffer;
 

@@ -8,7 +8,7 @@
 #ifndef INC_FUNCGENERATOR_HPP_
 #define INC_FUNCGENERATOR_HPP_
 
-#include "BspStm.hpp"
+#include "Bsp.hpp"
 #include <array>
 #include <arm_math.h>
 
