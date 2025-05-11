@@ -7,9 +7,9 @@
 
 #include <FuncGenerator.hpp>
 
-void Signal::calculateSine(){}
-void Signal::calculateSquare(){}
-void Signal::calculateSaw(){}
-void Signal::calculateTriangle(){}
+void FuncGenerator::calculateSine(){}
+void FuncGenerator::calculateSquare(){}
+void FuncGenerator::calculateSaw(){}
+void FuncGenerator::calculateTriangle(){}
 
 

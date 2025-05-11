@@ -7,6 +7,11 @@
 
 #include "BspStm.hpp"
 
+void BspStm::init()
+{
+	printf("Implementations are done in the main.c for STM32!");
+}
+
 //PWM--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Status BspStm::pwmStart_IT(TIM_HandleTypeDef *htim, uint32_t Channel)
 {

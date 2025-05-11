@@ -10,16 +10,15 @@
 
 #include <array>
 #include <arm_math.h>
-#define ARM_MATH_CM7
 
 constexpr uint8_t DMA_BUFFER_SIZE = 32;
 constexpr uint16_t SAMPLE_FREQ = 1000;
 constexpr uint16_t MID_POINT = 2048;
 
-class Signal final {
+class FuncGenerator final {
 public:
-	explicit Signal() = default;
-	~Signal()= default;
+	explicit FuncGenerator() = default;
+	~FuncGenerator()= default;
 
 	void calculateSine();
 	void calculateSquare();

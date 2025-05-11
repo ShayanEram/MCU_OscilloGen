@@ -8,7 +8,7 @@
 #ifndef BSP_INC_BSPSTM_HPP_
 #define BSP_INC_BSPSTM_HPP_
 
-#include "IBsp.hpp"
+#include <Bsp.hpp>
 #include "main.h"
 #include "adc.h"
 #include "cordic.h"
@@ -24,7 +24,6 @@
 #include "usbd_cdc_if.h"
 #include "gpio.h"
 
-
 enum class Status : uint8_t
 {
 	OK = 0x00,
@@ -33,11 +32,11 @@ enum class Status : uint8_t
 	TIMEOUT = 0x03
 };
 
-
 class BspStm final : public Bsp {
 public:
 	explicit BspStm() = default;
 	~BspStm() = default;
+	void init() override;
 
 	//PWM-------------------------------------------------------------------------------------------------------------------------
 	Status pwmStart_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
