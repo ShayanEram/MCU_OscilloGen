@@ -9,11 +9,8 @@
 #define INC_SERIALCONNECTION_HPP_
 
 #include "BspStm.hpp"
-#include <cstdint>
 
 
-
-//usb
 
 
 #endif /* INC_SERIALCONNECTION_HPP_ */
