@@ -7,7 +7,7 @@
 
 #include <FuncGenerator.hpp>
 
-FuncGenerator::FuncGenerator(){
+FuncGenerator::FuncGenerator(Bsp& bsp) : _bsp(bsp){
 	generateWaveforms();
 	activeWaveform = sineWave.data();
 }
@@ -67,5 +67,5 @@ void FuncGenerator::selectWaveform(WaveType type) {
 }
 
 void FuncGenerator::startWaveformOutput() {
-    //HAL_DAC_Start_DMA(&_hdac, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
+    //_bsp.dacStart_DMA(&_hdac, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
 }

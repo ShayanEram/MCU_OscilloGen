@@ -50,7 +50,7 @@
 
 /* USER CODE BEGIN PRIVATE_TYPES */
 extern uint8_t UsbRxDataBuffer[USB_RX_BUFF_SIZE];
-bool usbReceivedFlag  = false;
+volatile bool usbReceivedFlag  = false;
 /* USER CODE END PRIVATE_TYPES */
 
 /**
@@ -268,6 +268,7 @@ static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceHS);
 
+  usbReceivedFlag = true;
   receiveDataToBuffer(Buf,Len);
 
   return (USBD_OK);

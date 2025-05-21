@@ -2,6 +2,6 @@
 ../USB_DEVICE/App/usbd_cdc_if.c:170:15:CDC_DeInit_HS	1
 ../USB_DEVICE/App/usbd_cdc_if.c:184:15:CDC_Control_HS	1
 ../USB_DEVICE/App/usbd_cdc_if.c:265:15:CDC_Receive_HS	1
-../USB_DEVICE/App/usbd_cdc_if.c:284:9:CDC_Transmit_HS	2
-../USB_DEVICE/App/usbd_cdc_if.c:310:15:CDC_TransmitCplt_HS	1
-../USB_DEVICE/App/usbd_cdc_if.c:322:6:receiveDataToBuffer	1
+../USB_DEVICE/App/usbd_cdc_if.c:285:9:CDC_Transmit_HS	2
+../USB_DEVICE/App/usbd_cdc_if.c:311:15:CDC_TransmitCplt_HS	1
+../USB_DEVICE/App/usbd_cdc_if.c:323:6:receiveDataToBuffer	1

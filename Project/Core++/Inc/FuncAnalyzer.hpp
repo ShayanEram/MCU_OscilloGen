@@ -31,7 +31,6 @@ private:
 	Bsp& _bsp;
 	static constexpr uint16_t ADC_BUF_SIZE = 4096;
 	std::array<uint16_t, ADC_BUF_SIZE>adc_buffer;
-
 };
 
 #endif /* INC_FUNCANALYZER_HPP_ */

@@ -12,11 +12,9 @@
 #include <array>
 #include <arm_math.h>
 
-
-
 class FuncGenerator final {
 public:
-	explicit FuncGenerator();
+	explicit FuncGenerator(Bsp& bsp);
 	~FuncGenerator()= default;
 
 	enum class WaveType { SINE, SQUARE, TRIANGLE, SAWTOOTH };
@@ -28,6 +26,8 @@ public:
 	void startWaveformOutput();
 
 private:
+	Bsp& _bsp;
+
 	static constexpr uint16_t SAMPLE_COUNT = 128;  // Number of samples per cycle
 	static constexpr uint16_t MAX_AMPLITUDE = 4095;  // 12-bit DAC max value
 

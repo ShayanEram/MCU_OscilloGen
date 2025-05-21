@@ -39,20 +39,20 @@ void Lcd::sendData(uint8_t data) {
 }
 
 void Lcd::init() {
-    HAL_Delay(50);
+    _bsp.delay(50);
     sendCommand(0x30);
-    HAL_Delay(5);
+    _bsp.delay(5);
     sendCommand(0x30);
-    HAL_Delay(1);
+    _bsp.delay(1);
     sendCommand(0x30);
-    HAL_Delay(10);
+    _bsp.delay(10);
     sendCommand(0x20);
-    HAL_Delay(10);
+    _bsp.delay(10);
 
     sendCommand(LCD_CMD_FUNCTION_SET);
     sendCommand(LCD_CMD_DISPLAY_OFF);
     sendCommand(LCD_CMD_CLEAR_DISPLAY);
-    HAL_Delay(2);
+    _bsp.delay(2);
     sendCommand(LCD_CMD_ENTRY_MODE_SET);
     sendCommand(LCD_CMD_DISPLAY_ON);
 }

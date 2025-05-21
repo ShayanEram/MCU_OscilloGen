@@ -52,7 +52,7 @@
 #define APP_RX_DATA_SIZE  2048
 #define APP_TX_DATA_SIZE  2048
 /* USER CODE BEGIN EXPORTED_DEFINES */
-#define USB_RX_BUFF_SIZE   33
+#define USB_RX_BUFF_SIZE   15
 /* USER CODE END EXPORTED_DEFINES */
 
 /**
@@ -65,7 +65,7 @@
   */
 
 /* USER CODE BEGIN EXPORTED_TYPES */
-
+extern volatile bool usbReceivedFlag;
 /* USER CODE END EXPORTED_TYPES */
 
 /**
