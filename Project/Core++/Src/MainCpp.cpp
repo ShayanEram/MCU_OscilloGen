@@ -63,6 +63,14 @@ __attribute__((noreturn)) void MainCpp()
 		{
 			generate.startWaveformOutput();
 			analyze.startAnalysing();
+
+			#ifdef USE_EXTERN_ADC
+			exAnalyze.requestFFT();
+			#endif
+
+			#ifdef USE_EXTERN_DAC
+			exDac.voltageToCode(3.3, -6, 6);
+			#endif
 		}
 	}
 }
