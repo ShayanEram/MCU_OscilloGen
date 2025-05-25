@@ -13,8 +13,7 @@
 #include <array>
 
 
-class FuncAnalyzer final
-{
+class FuncAnalyzer final {
 public:
 	explicit FuncAnalyzer (Bsp& bsp);
 	~FuncAnalyzer() = default;

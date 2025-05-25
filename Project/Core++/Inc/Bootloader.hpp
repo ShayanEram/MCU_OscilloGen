@@ -10,7 +10,7 @@
 
 #include "Bsp.hpp"
 
-class Bootloader {
+class Bootloader final {
 public:
     explicit Bootloader(UART_HandleTypeDef& huart);
     ~Bootloader() = default;

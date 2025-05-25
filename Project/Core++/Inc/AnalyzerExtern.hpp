@@ -12,8 +12,7 @@
 
 #include "Bsp.hpp"
 
-class AnalyzerExt
-{
+class AnalyzerExt final {
 public:
 	explicit AnalyzerExt(Bsp& bsp);
 	~AnalyzerExt() = default;

@@ -13,6 +13,7 @@
 
 #define USE_EXTERN_ADC
 #define USE_EXTERN_DAC
+#define USE_CORDIC
 
 constexpr uint8_t Major_Version{1};
 constexpr uint8_t Minor_Version{0};
@@ -56,7 +57,7 @@ __attribute__((noreturn)) void MainCpp()
 	lcd.init();
 	lcd.sendString("LCD Online");
 
-	//bsp.watchdogStart(hiwdg);
+	bsp.watchdogStart(&hiwdg1);
 
 	while(true)
 	{
@@ -130,6 +131,6 @@ __attribute__((noreturn)) void MainCpp()
 			}
 		}
 
-		//bsp.watchdogRefresh(hiwdg);
+		bsp.watchdogRefresh(&hiwdg1);
 	}
 }

@@ -14,8 +14,7 @@
 constexpr int16_t SLAVE_ADDRESS = 0x4E;
 
 
-class Lcd final
-{
+class Lcd final {
 public:
 	explicit Lcd(Bsp& bsp, uint8_t address);
 	~Lcd() = default;

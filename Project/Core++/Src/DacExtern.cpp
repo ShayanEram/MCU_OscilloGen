@@ -12,9 +12,9 @@ Dac::Dac(Bsp& bsp): _bsp(bsp){}
 
 Status Dac::sendDataSPI(uint32_t data)
 {
-//	if(_bsp.spiTransmit_IT(_hspi, (uint8_t*)&data, 1) != Status::OK){
-//        return Status::ERROR;
-//    }
+	if(_bsp.spiTransmit_IT(&hspi1, (uint8_t*)&data, 1) != Status::OK){
+        return Status::ERROR;
+    }
 
     return Status::OK;
 }
@@ -22,7 +22,7 @@ Status Dac::sendDataSPI(uint32_t data)
 uint8_t Dac::receiveStatusSPI()
 {
 	uint8_t data = 0;
-	//_bsp.spiReceive_IT(hspi, data, Size);
+	_bsp.spiReceive_IT(&hspi1, &data, 1);
 
 	return data;
 }

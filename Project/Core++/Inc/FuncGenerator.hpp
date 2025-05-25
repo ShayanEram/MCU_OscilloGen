@@ -25,6 +25,7 @@ public:
 	void selectWaveform(uint8_t type);
 	void startWaveformOutput();
 	void stopWaveformOutput();
+	std::array<int32_t,128> generateWaveformCordic(const std::array<int32_t,128>& inputBuffer);
 
 private:
 	Bsp& _bsp;

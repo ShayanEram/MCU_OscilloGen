@@ -11,12 +11,12 @@ FuncAnalyzer::FuncAnalyzer(Bsp& bsp) : _bsp(bsp) {}
 
 void FuncAnalyzer::startAnalysing()
 {
-	//_bsp.adcStart_DMA(&hadc, reinterpret_cast<uint32_t*>(adc_buffer.data()), ADC_BUF_SIZE);
+	_bsp.adcStart_DMA(&hadc1, reinterpret_cast<uint32_t*>(adc_buffer.data()), ADC_BUF_SIZE);
 }
 
 void FuncAnalyzer::stopAnalyzing()
 {
-	//_bsp.adcStopDMA(hadc);
+	_bsp.adcStopDMA(&hadc1);
 }
 
 float32_t FuncAnalyzer::measurePeakVoltage() {

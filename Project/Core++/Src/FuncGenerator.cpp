@@ -34,8 +34,8 @@ void FuncGenerator::generateWaveforms()
 
 void FuncGenerator::setFrequency(uint32_t frequency)
 {
-    //uint32_t timerPeriod = HAL_RCC_GetPCLK1Freq() / (frequency * SAMPLE_COUNT);
-    //__HAL_TIM_SET_AUTORELOAD(&_htim, timerPeriod);
+    uint32_t timerPeriod = HAL_RCC_GetPCLK1Freq() / (frequency * SAMPLE_COUNT);
+    __HAL_TIM_SET_AUTORELOAD(&htim1, timerPeriod);
 }
 
 void FuncGenerator::setAmplitude(float amplitude)
@@ -74,10 +74,19 @@ void FuncGenerator::selectWaveform(uint8_t type)
 
 void FuncGenerator::startWaveformOutput()
 {
-    //_bsp.dacStart_DMA(&_hdac, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
+    _bsp.dacStart_DMA(&hdac1, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
 }
 
 void FuncGenerator::stopWaveformOutput()
 {
-    //_bsp.adcStopDMA(hadc;)
+    _bsp.adcStopDMA(&hadc1);
 }
+
+std::array<int32_t,128> FuncGenerator::generateWaveformCordic(const std::array<int32_t,128>& inputBuffer)
+{
+	std::array<int32_t, 128> outputBuffer;
+	_bsp.cordicCalculate_DMA(&hcordic, inputBuffer.data(), outputBuffer.data(), 128, CORDIC_DMA_DIR_IN_OUT);
+	return outputBuffer;
+}
+
+

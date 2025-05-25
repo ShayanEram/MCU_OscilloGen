@@ -8,4 +8,6 @@ C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core++/Src/FuncGenerator.cpp:56:6:void FuncGenerator::selectWaveform(uint8_t)	5
 ../Core++/Src/FuncGenerator.cpp:75:6:void FuncGenerator::startWaveformOutput()	1
 ../Core++/Src/FuncGenerator.cpp:80:6:void FuncGenerator::stopWaveformOutput()	1
+../Core++/Src/FuncGenerator.cpp:85:25:std::array<long int, 128> FuncGenerator::generateWaveformCordic(const std::array<long int, 128>&)	1
 C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/array:200:7:constexpr std::array<_Tp, _Nm>::value_type& std::array<_Tp, _Nm>::operator[](size_type) [with _Tp = short unsigned int; unsigned int _Nm = 128]	1
+C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.13.3.rel1.win32_1.0.0.202411081344\tools\bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/include/c++/13.3.1/array:281:7:constexpr const std::array<_Tp, _Nm>::value_type* std::array<_Tp, _Nm>::data() const [with _Tp = long int; unsigned int _Nm = 128]	1

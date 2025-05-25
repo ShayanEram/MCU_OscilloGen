@@ -11,13 +11,14 @@ AnalyzerExt::AnalyzerExt(Bsp& bsp): _bsp(bsp){}
 
 void AnalyzerExt::sendCommand(uint8_t command)
 {
-	//_bsp.uartTransmit_DMA(&huart, &command, 1);
+	_bsp.uartTransmit_DMA(&huart2, &command, 1);
 }
 
 uint8_t AnalyzerExt::receiveData()
 {
 	uint8_t data;
-	//_bsp.uartReceive_DMA(&huart, &data, 1);
+	_bsp.uartReceive_DMA(&huart2, &data, 1);
+	return data;
 }
 
 uint8_t AnalyzerExt::requestFFT()
