@@ -82,6 +82,12 @@ default.size.stdout \
 OBJDUMP_LIST += \
 OscilloGen.list \
 
+OBJCOPY_HEX += \
+OscilloGen.hex \
+
+OBJCOPY_BIN += \
+OscilloGen.bin \
+
 
 # All Target
 all: main-build
@@ -105,12 +111,22 @@ OscilloGen.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+OscilloGen.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "OscilloGen.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
+OscilloGen.bin: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "OscilloGen.bin"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 # Other Targets
 clean:
-	-$(RM) OscilloGen.elf OscilloGen.list OscilloGen.map default.size.stdout
+	-$(RM) OscilloGen.bin OscilloGen.elf OscilloGen.hex OscilloGen.list OscilloGen.map default.size.stdout
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 fail-specified-linker-script-missing:
 	@echo 'Error: Cannot find the specified linker script. Check the linker settings in the build configuration.'

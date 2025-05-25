@@ -42,7 +42,7 @@ struct __attribute__((packed)) Oscilloscope
 {
 	bool stop = false;
 	bool fft = false;
-
+	bool filter = false;
 };
 
 struct __attribute__((packed)) ReceivedData

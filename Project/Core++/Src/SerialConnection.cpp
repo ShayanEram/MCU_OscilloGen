@@ -18,7 +18,6 @@ Status SerialCtn::interfaceHandshake(uint8_t major, uint8_t minor)
 	snprintf(versionStr, sizeof(versionStr), "Version: %d.%d", major, minor);
 	_bsp.usbTransmit(reinterpret_cast<uint8_t*>(versionStr), strlen(versionStr));
 
-
 	UsbArray dataReceived = receiveData();
 
 	if(dataReceived[0] != 0xFF && dataReceived[1] != 0xAA && dataReceived[2] != 0xFF)
@@ -40,25 +39,27 @@ ReceivedData SerialCtn::processReceivedData()
 	ReceivedData data = {};
 	UsbArray dataReceived = receiveData();
 
-	// Oscilloscope
-	if(dataReceived[0] != 0x00 && dataReceived[3] != 0x00 && dataReceived[6] != 0x00 && dataReceived[9] != 0x00 && dataReceived[13] != 0x00)
+	if(dataReceived[0] == 0xAA && dataReceived[1] == 0xFF) // Function generator command
 	{
-		//data.stop = true;
-		return data;
+		data.generate.signalType = dataReceived[2];
+		std::memcpy(&data.generate.frequency, &dataReceived[3], sizeof(float));
+		std::memcpy(&data.generate.amplitude, &dataReceived[7], sizeof(float));
+		std::memcpy(&data.generate.offset, &dataReceived[11], sizeof(float));
 	}
-	// Func generator
-	else if (dataReceived[0] != 0x01 || dataReceived[0] != 0x02 || dataReceived[0] != 0x03 || dataReceived[0] != 0x04 || dataReceived[0] != 0x05)
+	else if(dataReceived[0] == 0xFF && dataReceived[1] == 0xC3) // Oscilloscope command
 	{
-		_bsp.usbTransmit((uint8_t*)"Invalid data\n", 15);
+		data.analyze.stop = std::all_of(dataReceived.begin() + 2, dataReceived.end(), [](uint8_t byte) { return byte == 0; });
+
+		if(!data.analyze.stop)
+		{
+			data.analyze.fft = dataReceived[2];
+			data.analyze.filter = dataReceived[3];
+		}
+	}
+	else // Invalid command
+	{
+		printf("DEV_ERROR: Invalide command was received");
 		return {};
-	}
-	else
-	{
-//		data.type = dataReceived[0];
-//		std::memcpy(&data.frequency, &dataReceived[1], sizeof(float));
-//		std::memcpy(&data.amplitude, &dataReceived[5], sizeof(float));
-//		std::memcpy(&data.offset, &dataReceived[9], sizeof(float));
-//		data.stop = false;
 	}
 
 	return data;
