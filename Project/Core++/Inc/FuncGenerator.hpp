@@ -17,13 +17,14 @@ public:
 	explicit FuncGenerator(Bsp& bsp);
 	~FuncGenerator()= default;
 
-	enum class WaveType { SINE, SQUARE, TRIANGLE, SAWTOOTH };
+	enum WaveType { SINE, SQUARE, TRIANGLE, SAWTOOTH };
 
 	void generateWaveforms();
 	void setFrequency(uint32_t frequency);
 	void setAmplitude(float amplitude);
-	void selectWaveform(WaveType type);
+	void selectWaveform(uint8_t type);
 	void startWaveformOutput();
+	void stopWaveformOutput();
 
 private:
 	Bsp& _bsp;
@@ -42,7 +43,7 @@ private:
     std::array<uint16_t, SAMPLE_COUNT> triangleWave;
     std::array<uint16_t, SAMPLE_COUNT> sawtoothWave;
 
-    WaveType currentWaveform = WaveType::SINE;
+    uint8_t currentWaveform = SINE;
     uint16_t* activeWaveform = nullptr;
 
     void updateWaveform(uint16_t* waveform, float amplitude);

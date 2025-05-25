@@ -94,6 +94,7 @@ public:
 	Status i2cReceive_Master_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size);
 
 	//wdg----------------------------------------------------------------------------------------------------------------------------
+	Status watchdogStart(IWDG_HandleTypeDef *hiwdg);
 	Status watchdogRefresh(IWDG_HandleTypeDef *hiwdg);
 
 	//CORDIC-------------------------------------------------------------------------------------------------------------------------

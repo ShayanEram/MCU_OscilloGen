@@ -43,7 +43,7 @@ ReceivedData SerialCtn::processReceivedData()
 	// Oscilloscope
 	if(dataReceived[0] != 0x00 && dataReceived[3] != 0x00 && dataReceived[6] != 0x00 && dataReceived[9] != 0x00 && dataReceived[13] != 0x00)
 	{
-		data.stop = true;
+		//data.stop = true;
 		return data;
 	}
 	// Func generator
@@ -54,11 +54,11 @@ ReceivedData SerialCtn::processReceivedData()
 	}
 	else
 	{
-		data.type = dataReceived[0];
-		std::memcpy(&data.frequency, &dataReceived[1], sizeof(float));
-		std::memcpy(&data.amplitude, &dataReceived[5], sizeof(float));
-		std::memcpy(&data.offset, &dataReceived[9], sizeof(float));
-		data.stop = false;
+//		data.type = dataReceived[0];
+//		std::memcpy(&data.frequency, &dataReceived[1], sizeof(float));
+//		std::memcpy(&data.amplitude, &dataReceived[5], sizeof(float));
+//		std::memcpy(&data.offset, &dataReceived[9], sizeof(float));
+//		data.stop = false;
 	}
 
 	return data;

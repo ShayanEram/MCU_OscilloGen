@@ -14,13 +14,42 @@
 
 using UsbArray = std::array<uint8_t, USB_RX_BUFF_SIZE>;
 
-struct __attribute__((packed)) ReceivedData
+enum Mode
 {
-	uint8_t type = 0;
+	FUNCTION_GENERATOR_MODE = 0x00,
+	OSCILLOSCOPE_MODE       = 0x01,
+	UPDATE_MODE				= 0X02
+};
+
+enum SignalType
+{
+	TYPE_NOISE    = 0x00,
+	TYPE_SINE     = 0x01,
+	TYPE_SQUARE   = 0x02,
+	TYPE_TRIANGLE = 0x03,
+	TYPE_SAW      = 0x04
+};
+
+struct __attribute__((packed)) FunctionGenerator
+{
+	uint8_t signalType = TYPE_SINE;
 	float frequency = 0.0f;
 	float amplitude = 0.0f;
 	float offset = 0.0f;
+};
+
+struct __attribute__((packed)) Oscilloscope
+{
 	bool stop = false;
+	bool fft = false;
+
+};
+
+struct __attribute__((packed)) ReceivedData
+{
+	uint8_t mode = FUNCTION_GENERATOR_MODE;
+	FunctionGenerator generate;
+	Oscilloscope analyze;
 };
 
 class SerialCtn

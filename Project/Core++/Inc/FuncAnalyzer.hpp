@@ -13,13 +13,14 @@
 #include <array>
 
 
-class FuncAnalyser
+class FuncAnalyzer final
 {
 public:
-	explicit FuncAnalyser (Bsp& bsp);
-	~FuncAnalyser() = default;
+	explicit FuncAnalyzer (Bsp& bsp);
+	~FuncAnalyzer() = default;
 
 	void startAnalysing();
+	void stopAnalyzing();
     float32_t measurePeakVoltage();
     float32_t measureRMSVoltage();
     float32_t measureDutyCycle();

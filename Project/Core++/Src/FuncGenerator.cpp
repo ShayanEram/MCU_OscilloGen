@@ -7,12 +7,14 @@
 
 #include <FuncGenerator.hpp>
 
-FuncGenerator::FuncGenerator(Bsp& bsp) : _bsp(bsp){
+FuncGenerator::FuncGenerator(Bsp& bsp) : _bsp(bsp)
+{
 	generateWaveforms();
 	activeWaveform = sineWave.data();
 }
 
-void FuncGenerator::generateWaveforms() {
+void FuncGenerator::generateWaveforms()
+{
     for (int i = 0; i < SAMPLE_COUNT; i++) {
         float angle = 2.0f * PI * i / SAMPLE_COUNT;
 
@@ -30,42 +32,52 @@ void FuncGenerator::generateWaveforms() {
     }
 }
 
-void FuncGenerator::setFrequency(uint32_t frequency) {
+void FuncGenerator::setFrequency(uint32_t frequency)
+{
     //uint32_t timerPeriod = HAL_RCC_GetPCLK1Freq() / (frequency * SAMPLE_COUNT);
     //__HAL_TIM_SET_AUTORELOAD(&_htim, timerPeriod);
 }
 
-void FuncGenerator::setAmplitude(float amplitude) {
+void FuncGenerator::setAmplitude(float amplitude)
+{
     updateWaveform(sineWave.data(), amplitude);
     updateWaveform(squareWave.data(), amplitude);
     updateWaveform(triangleWave.data(), amplitude);
     updateWaveform(sawtoothWave.data(), amplitude);
 }
 
-void FuncGenerator::updateWaveform(uint16_t* waveform, float amplitude) {
+void FuncGenerator::updateWaveform(uint16_t* waveform, float amplitude)
+{
     for (int i = 0; i < SAMPLE_COUNT; i++) {
         waveform[i] = static_cast<uint16_t>(MAX_AMPLITUDE * amplitude * waveform[i] / MAX_AMPLITUDE);
     }
 }
 
-void FuncGenerator::selectWaveform(WaveType type) {
+void FuncGenerator::selectWaveform(uint8_t type)
+{
     currentWaveform = type;
     switch (type) {
-        case WaveType::SINE:
+        case SINE:
             activeWaveform = sineWave.data();
             break;
-        case WaveType::SQUARE:
+        case SQUARE:
             activeWaveform = squareWave.data();
             break;
-        case WaveType::TRIANGLE:
+        case TRIANGLE:
             activeWaveform = triangleWave.data();
             break;
-        case WaveType::SAWTOOTH:
+        case SAWTOOTH:
             activeWaveform = sawtoothWave.data();
             break;
     }
 }
 
-void FuncGenerator::startWaveformOutput() {
+void FuncGenerator::startWaveformOutput()
+{
     //_bsp.dacStart_DMA(&_hdac, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
+}
+
+void FuncGenerator::stopWaveformOutput()
+{
+    //_bsp.adcStopDMA(hadc;)
 }

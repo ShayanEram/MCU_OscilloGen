@@ -19,7 +19,7 @@ constexpr uint8_t Minor_Version{0};
 
 Bsp bsp;
 
-FuncAnalyser analyze(bsp);
+FuncAnalyzer analyze(bsp);
 FuncGenerator generate(bsp);
 Lcd lcd(bsp, SLAVE_ADDRESS);
 SerialCtn connection(bsp);
@@ -35,6 +35,12 @@ Dac exDac(bsp);
 
 __attribute__((noreturn)) void MainCpp()
 {
+	ReceivedData data;
+	bool dataReceived{false};
+	float32_t fftOutput;
+	const uint32_t DELAY = 1000;
+
+
 	bool interface{false};
 	do
 	{
@@ -42,35 +48,88 @@ __attribute__((noreturn)) void MainCpp()
 		if (status == Status::OK) {
 			interface = true;
 		}
-		bsp.delay(1000);
+		bsp.delay(DELAY);
 
 	} while (!interface);
 
-	ReceivedData data = connection.processReceivedData();
+
 	lcd.init();
 	lcd.sendString("LCD Online");
 
+	//bsp.watchdogStart(hiwdg);
 
 	while(true)
 	{
 		if(usbReceivedFlag)
 		{
 			data = connection.processReceivedData();
-			generate.setAmplitude(data.amplitude);
-			generate.setFrequency(data.frequency);
+			usbReceivedFlag = false;
+			dataReceived = true;
+
+			if(data.mode == FUNCTION_GENERATOR_MODE)
+			{
+				generate.selectWaveform(data.generate.signalType);
+				generate.setAmplitude(data.generate.amplitude);
+				generate.setFrequency(data.generate.amplitude);
+				generate.generateWaveforms();
+				generate.startWaveformOutput();
+			}
+			else if(data.mode == OSCILLOSCOPE_MODE)
+			{
+				generate.stopWaveformOutput();
+
+				#ifdef USE_EXTERN_DAC
+				exDac.noOperation();
+				#endif
+
+				analyze.startAnalysing();
+			}
+			else if(data.mode == UPDATE_MODE)
+			{
+				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
+				dataReceived = false;
+			}
+			else
+			{
+				printf("DEV_ERROR: Incorrect mode selected!\n");
+				dataReceived = false;
+			}
 		}
-		else
+		else if(dataReceived)
 		{
-			generate.startWaveformOutput();
-			analyze.startAnalysing();
+			if(data.mode == FUNCTION_GENERATOR_MODE)
+			{
+				generate.startWaveformOutput();
 
-			#ifdef USE_EXTERN_ADC
-			exAnalyze.requestFFT();
-			#endif
+				#ifdef USE_EXTERN_DAC
+				exDac.voltageToCode(3.3, -6, 6);
+				#endif
+			}
+			else if(data.mode == OSCILLOSCOPE_MODE)
+			{
+				if(data.analyze.stop)
+				{
+					analyze.stopAnalyzing();
+				}
+				else if(data.analyze.fft)
+				{
+					analyze.computeFFT(&fftOutput);
 
-			#ifdef USE_EXTERN_DAC
-			exDac.voltageToCode(3.3, -6, 6);
-			#endif
+					#ifdef USE_EXTERN_ADC
+					exAnalyze.requestFFT();
+					#endif
+				}
+			}
+			else if(data.mode == UPDATE_MODE)
+			{
+				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
+			}
+			else
+			{
+				printf("DEV_ERROR: Incorrect mode selected!\n");
+			}
 		}
+
+		//bsp.watchdogRefresh(hiwdg);
 	}
 }

@@ -224,6 +224,12 @@ Status Bsp::i2cReceive_Master_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, 
 }
 
 //wdg----------------------------------------------------------------------------------------------------------------------------
+Status Bsp::watchdogStart(IWDG_HandleTypeDef *hiwdg)
+{
+	HAL_StatusTypeDef halStatus = HAL_IWDG_Init(hiwdg);
+	return convertHALStatus(halStatus);
+}
+
 Status Bsp::watchdogRefresh(IWDG_HandleTypeDef *hiwdg)
 {
 	HAL_StatusTypeDef halStatus = HAL_IWDG_Refresh(hiwdg);

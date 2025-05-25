@@ -32,10 +32,11 @@ C:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core++/Bsp/Bsp.cpp:208:8:Status Bsp::i2cReceive_Master_IT(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
 ../Core++/Bsp/Bsp.cpp:214:8:Status Bsp::i2cTransmit_Master_DMA(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
 ../Core++/Bsp/Bsp.cpp:220:8:Status Bsp::i2cReceive_Master_DMA(I2C_HandleTypeDef*, uint16_t, uint8_t*, uint16_t)	1
-../Core++/Bsp/Bsp.cpp:227:8:Status Bsp::watchdogRefresh(IWDG_HandleTypeDef*)	1
-../Core++/Bsp/Bsp.cpp:234:8:Status Bsp::cordicInit(CORDIC_HandleTypeDef*, bool)	2
-../Core++/Bsp/Bsp.cpp:251:8:Status Bsp::cordicCalculate_DMA(CORDIC_HandleTypeDef*, const int32_t*, int32_t*, uint32_t, uint32_t)	2
-../Core++/Bsp/Bsp.cpp:260:6:void Bsp::delay(uint32_t)	1
-../Core++/Bsp/Bsp.cpp:267:8:Status Bsp::convertHALStatus(HAL_StatusTypeDef)	5
-../Core++/Bsp/Bsp.cpp:284:8:Status Bsp::convertUSBStatus(USBD_StatusTypeDef)	5
-../Core++/Bsp/Bsp.cpp:304:16:int _write(int, char*, int)	3
+../Core++/Bsp/Bsp.cpp:227:8:Status Bsp::watchdogStart(IWDG_HandleTypeDef*)	1
+../Core++/Bsp/Bsp.cpp:233:8:Status Bsp::watchdogRefresh(IWDG_HandleTypeDef*)	1
+../Core++/Bsp/Bsp.cpp:240:8:Status Bsp::cordicInit(CORDIC_HandleTypeDef*, bool)	2
+../Core++/Bsp/Bsp.cpp:257:8:Status Bsp::cordicCalculate_DMA(CORDIC_HandleTypeDef*, const int32_t*, int32_t*, uint32_t, uint32_t)	2
+../Core++/Bsp/Bsp.cpp:266:6:void Bsp::delay(uint32_t)	1
+../Core++/Bsp/Bsp.cpp:273:8:Status Bsp::convertHALStatus(HAL_StatusTypeDef)	5
+../Core++/Bsp/Bsp.cpp:290:8:Status Bsp::convertUSBStatus(USBD_StatusTypeDef)	5
+../Core++/Bsp/Bsp.cpp:310:16:int _write(int, char*, int)	3
