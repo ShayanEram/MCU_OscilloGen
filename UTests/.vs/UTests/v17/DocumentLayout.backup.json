@@ -3,46 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\FuncGenerator.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\MockHAL.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:Mocks\\MockHAL.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:Mocks\\Bsp.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\AnalyzerExtern.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\SerialConnection_Test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:SerialConnection_Test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\DacExtern_Test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:DacExtern_Test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\DacExtern.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:test.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\SerialConnection.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\Bootloader.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:Mocks\\Bsp.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Inc\\AnalyzerExtern.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Tests\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E199DD80-1EE5-4B1B-B593-02C58280299C}|UTests.vcxproj|solutionrelative:Tests\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -69,149 +31,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FuncGenerator.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\FuncGenerator.cpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Src\\FuncGenerator.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\FuncGenerator.cpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Src\\FuncGenerator.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Tests\\main.cpp",
+              "RelativeDocumentMoniker": "Tests\\main.cpp",
+              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Tests\\main.cpp",
+              "RelativeToolTip": "Tests\\main.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:11:02.024Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MockHAL.hpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\MockHAL.hpp",
-              "RelativeDocumentMoniker": "Mocks\\MockHAL.hpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\MockHAL.hpp",
-              "RelativeToolTip": "Mocks\\MockHAL.hpp",
-              "ViewState": "AgIAAEYAAAAAAAAAAAAUwFoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-26T18:10:42.681Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Bsp.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.cpp",
-              "RelativeDocumentMoniker": "Mocks\\Bsp.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.cpp",
-              "RelativeToolTip": "Mocks\\Bsp.cpp",
-              "ViewState": "AgIAAOwAAAAAAAAAAAAUwPUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:10:35.101Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SerialConnection_Test.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\SerialConnection_Test.cpp",
-              "RelativeDocumentMoniker": "SerialConnection_Test.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\SerialConnection_Test.cpp",
-              "RelativeToolTip": "SerialConnection_Test.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:06:11.2Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DacExtern_Test.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\DacExtern_Test.cpp",
-              "RelativeDocumentMoniker": "DacExtern_Test.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\DacExtern_Test.cpp",
-              "RelativeToolTip": "DacExtern_Test.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:06:08.045Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DacExtern.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\DacExtern.cpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Src\\DacExtern.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\DacExtern.cpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Src\\DacExtern.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:06:02.376Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "test.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\test.cpp",
-              "RelativeDocumentMoniker": "test.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\test.cpp",
-              "RelativeToolTip": "test.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:04:18.545Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "SerialConnection.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\SerialConnection.cpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Src\\SerialConnection.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\SerialConnection.cpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Src\\SerialConnection.cpp",
-              "ViewState": "AgIAAAMAAAAAAAAAAADwv0sAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:04:05.257Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Bootloader.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\Bootloader.cpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Src\\Bootloader.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\Bootloader.cpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Src\\Bootloader.cpp",
-              "ViewState": "AgIAABEAAAAAAAAAAADwvyAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:04:03.761Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Bsp.hpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.hpp",
-              "RelativeDocumentMoniker": "Mocks\\Bsp.hpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\UTests\\Mocks\\Bsp.hpp",
-              "RelativeToolTip": "Mocks\\Bsp.hpp",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-26T18:00:50.485Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AnalyzerExtern.hpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Inc\\AnalyzerExtern.hpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Inc\\AnalyzerExtern.hpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Inc\\AnalyzerExtern.hpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Inc\\AnalyzerExtern.hpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-26T18:00:49.382Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AnalyzerExtern.cpp",
-              "DocumentMoniker": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\AnalyzerExtern.cpp",
-              "RelativeDocumentMoniker": "..\\Project\\Core\u002B\u002B\\Src\\AnalyzerExtern.cpp",
-              "ToolTip": "C:\\Users\\shaya\\Documents\\GitHub\\MCU_OscilloGen\\Project\\Core\u002B\u002B\\Src\\AnalyzerExtern.cpp",
-              "RelativeToolTip": "..\\Project\\Core\u002B\u002B\\Src\\AnalyzerExtern.cpp",
-              "ViewState": "AgIAACEAAAAAAAAAAAAUwDAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-26T18:00:45.53Z",
+              "WhenOpened": "2025-05-26T18:34:41.889Z",
               "EditorCaption": ""
             }
           ]

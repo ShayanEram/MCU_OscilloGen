@@ -22,19 +22,25 @@
     <ClCompile Include="..\Project\Core++\Src\SerialConnection.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="DacExtern_Test.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="SerialConnection_Test.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Mocks\Bsp.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="pch.cpp">
+    <ClCompile Include="Tests\AnalyzerExtern_Test.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\DacExtern_Test.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\FuncAnalyzer_Test.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\FuncGenerator_Test.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\main.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\SerialConnection_Test.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
@@ -65,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="Mocks\MockHAL.hpp">
       <Filter>Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="pch.h">
-      <Filter>Tests</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
