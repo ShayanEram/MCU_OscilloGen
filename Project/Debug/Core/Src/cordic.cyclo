@@ -1,3 +1,0 @@
-../Core/Src/cordic.c:32:6:MX_CORDIC_Init	2
-../Core/Src/cordic.c:53:6:HAL_CORDIC_MspInit	4
-../Core/Src/cordic.c:110:6:HAL_CORDIC_MspDeInit	2
