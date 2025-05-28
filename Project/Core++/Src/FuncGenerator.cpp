@@ -74,18 +74,18 @@ void FuncGenerator::selectWaveform(uint8_t type)
 
 void FuncGenerator::startWaveformOutput()
 {
-    _bsp.dacStart_DMA(&hdac1, DAC_CHANNEL_1, reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT, DAC_ALIGN_12B_R);
+    _bsp.dacStart_DMA(reinterpret_cast<uint32_t*>(activeWaveform), SAMPLE_COUNT);
 }
 
 void FuncGenerator::stopWaveformOutput()
 {
-    _bsp.adcStopDMA(&hadc1);
+    _bsp.dacStopDMA();
 }
 
 std::array<int32_t,128> FuncGenerator::generateWaveformCordic(const std::array<int32_t,128>& inputBuffer)
 {
 	std::array<int32_t, 128> outputBuffer;
-	_bsp.cordicCalculate_DMA(&hcordic, inputBuffer.data(), outputBuffer.data(), 128, CORDIC_DMA_DIR_IN_OUT);
+	_bsp.cordicCalculate_DMA(inputBuffer.data(), outputBuffer.data(), 128);
 	return outputBuffer;
 }
 

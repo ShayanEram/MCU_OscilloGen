@@ -10,9 +10,7 @@
 
 #define ARM_MATH_CM7
 
-#include <cstdint>
-#include <stdio.h>
-#include <iostream>
+#include "BspInterface.hpp"
 
 #include "main.h"
 #include "adc.h"
@@ -29,80 +27,73 @@
 #include "usbd_cdc_if.h"
 #include "gpio.h"
 
-enum class Status : uint8_t
-{
-	OK = 0x00,
-	ERROR = 0x01,
-	BUSY = 0x02,
-	TIMEOUT = 0x03
-};
 
-class Bsp final {
+class Bsp final: public BspInterface {
 public:
 	explicit Bsp() = default;
 	~Bsp() = default;
 
 	//PWM-------------------------------------------------------------------------------------------------------------------------
-	Status pwmStart_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
-	Status pwmStop_IT(TIM_HandleTypeDef *htim, uint32_t Channel);
-	Status pwmStart_DMA(TIM_HandleTypeDef *htim, uint32_t Channel, const uint32_t *pData, uint16_t Length);
-	Status pwmStop_DMA(TIM_HandleTypeDef *htim, uint32_t Channel);
+	Status pwmStart_IT() override;
+	Status pwmStop_IT() override;
+	Status pwmStart_DMA(const uint32_t *pData, uint16_t Length) override;
+	Status pwmStop_DMA() override;
 
 	//SPI-------------------------------------------------------------------------------------------------------------------------
-	Status spiTransmit_IT(SPI_HandleTypeDef *hspi, const uint8_t *pData, uint16_t Size);
-	Status spiReceive_IT(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
-	Status spiTransmitReceive_IT(SPI_HandleTypeDef *hspi, const uint8_t *pTxData, uint8_t *pRxData, uint16_t Size);
-	Status spiTransmit_DMA(SPI_HandleTypeDef *hspi, const uint8_t *pData, uint16_t Size);
-	Status spiReceive_DMA(SPI_HandleTypeDef *hspi, uint8_t *pData, uint16_t Size);
-	Status spiTransmitReceive_DMA(SPI_HandleTypeDef *hspi, const uint8_t *pTxData, uint8_t *pRxData, uint16_t Size);
+	Status spiTransmit_IT(const uint8_t *pData, uint16_t Size) override;
+	Status spiReceive_IT(uint8_t *pData, uint16_t Size) override;
+	Status spiTransmitReceive_IT(const uint8_t *pTxData, uint8_t *pRxData, uint16_t Size) override;
+	Status spiTransmit_DMA(const uint8_t *pData, uint16_t Size) override;
+	Status spiReceive_DMA(uint8_t *pData, uint16_t Size) override;
+	Status spiTransmitReceive_DMA(const uint8_t *pTxData, uint8_t *pRxData, uint16_t Size) override;
 
 	//GPIO-------------------------------------------------------------------------------------------------------------------------
-	Status gpioWrite(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState);
-	Status gpioRead(const GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin, GPIO_PinState GPIO_Pin_status);
-	Status gpioToggle(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
+	Status gpioWrite(uint16_t GPIO_Pin, bool PinState) override;
+	bool gpioRead(uint16_t GPIO_Pin) override;
+	Status gpioToggle(uint16_t GPIO_Pin) override;
 
 	//UART--------------------------------------------------------------------------------------------------------------------------
-	Status uartTransmit_IT(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
-	Status uartReceive_IT(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
-	Status uartTransmit_DMA(UART_HandleTypeDef *huart, const uint8_t *pData, uint16_t Size);
-	Status uartReceive_DMA(UART_HandleTypeDef *huart, uint8_t *pData, uint16_t Size);
+	Status uartTransmit_IT(const uint8_t *pData, uint16_t Size) override;
+	Status uartReceive_IT(uint8_t *pData, uint16_t Size) override;
+	Status uartTransmit_DMA(const uint8_t *pData, uint16_t Size) override;
+	Status uartReceive_DMA(uint8_t *pData, uint16_t Size) override;
 
 	//USB----------------------------------------------------------------------------------------------------------------------------
-	Status usbTransmit(uint8_t* Buf, uint16_t Len);
+	Status usbTransmit(uint8_t* Buf, uint16_t Len) override;
 
 	//ADC----------------------------------------------------------------------------------------------------------------------------
-	Status adcCalibrationStart(ADC_HandleTypeDef *hadc, uint32_t CalibrationMode, uint32_t SingleDiff);
-	Status adcStart_IT(ADC_HandleTypeDef *hadc);
-	Status adcStop_IT(ADC_HandleTypeDef *hadc);
-	Status adcStart_DMA(ADC_HandleTypeDef *hadc, uint32_t *pData, uint32_t Length);
-	Status adcStopDMA(ADC_HandleTypeDef *hadc);
+	Status adcCalibrationStart(uint32_t CalibrationMode, uint32_t SingleDiff) override;
+	Status adcStart_IT() override;
+	Status adcStop_IT() override;
+	Status adcStart_DMA(uint32_t *pData, uint32_t Length) override;
+	Status adcStopDMA() override;
 
 	//TIM----------------------------------------------------------------------------------------------------------------------------
-	Status timStart_IT(TIM_HandleTypeDef *htim);
-	Status timStop_IT(TIM_HandleTypeDef *htim);
-	Status timeStart_DMA(TIM_HandleTypeDef *htim, const uint32_t *pData, uint16_t Length);
-	Status timeStopDMA(TIM_HandleTypeDef *htim);
+	Status timStart_IT() override;
+	Status timStop_IT() override;
+	Status timeStart_DMA(const uint32_t *pData, uint16_t Length) override;
+	Status timeStopDMA() override;
 
 	//DAC----------------------------------------------------------------------------------------------------------------------------
-	Status dacStart_DMA(DAC_HandleTypeDef *hdac, uint32_t Channel, const uint32_t *pData, uint32_t Length, uint32_t Alignment);
-	Status dacStopDMA(DAC_HandleTypeDef *hdac, uint32_t Channel);
+	Status dacStart_DMA(const uint32_t *pData, uint32_t Length) override;
+	Status dacStopDMA() override;
 
 	//I2C----------------------------------------------------------------------------------------------------------------------------
-	Status i2cTransmit_Master_IT(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size);
-	Status i2cReceive_Master_IT(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size);
-	Status i2cTransmit_Master_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size);
-	Status i2cReceive_Master_DMA(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData, uint16_t Size);
+	Status i2cTransmit_Master_IT(uint16_t DevAddress, uint8_t *pData, uint16_t Size) override;
+	Status i2cReceive_Master_IT(uint16_t DevAddress, uint8_t *pData, uint16_t Size) override;
+	Status i2cTransmit_Master_DMA(uint16_t DevAddress, uint8_t *pData, uint16_t Size) override;
+	Status i2cReceive_Master_DMA(uint16_t DevAddress, uint8_t *pData, uint16_t Size) override;
 
 	//wdg----------------------------------------------------------------------------------------------------------------------------
-	Status watchdogStart(IWDG_HandleTypeDef *hiwdg);
-	Status watchdogRefresh(IWDG_HandleTypeDef *hiwdg);
+	Status watchdogStart() override;
+	Status watchdogRefresh() override;
 
 	//CORDIC-------------------------------------------------------------------------------------------------------------------------
-	Status cordicInit(CORDIC_HandleTypeDef *hcordic, bool cosine);
-	Status cordicCalculate_DMA(CORDIC_HandleTypeDef *hcordic, const int32_t *pInBuff, int32_t *pOutBuff, uint32_t NbCalc, uint32_t DMADirection);
+	Status cordicInit(uint8_t type) override;
+	Status cordicCalculate_DMA(const int32_t *pInBuff, int32_t *pOutBuff, uint32_t NbCalc) override;
 
 	//Extra--------------------------------------------------------------------------------------------------------------------------
-	void delay(uint32_t Delay);
+	void delay(uint32_t Delay) override;
 
 
 private:

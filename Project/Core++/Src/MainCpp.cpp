@@ -57,7 +57,7 @@ __attribute__((noreturn)) void MainCpp()
 	lcd.init();
 	lcd.sendString("LCD Online");
 
-	bsp.watchdogStart(&hiwdg1);
+	bsp.watchdogStart();
 
 	while(true)
 	{
@@ -131,6 +131,6 @@ __attribute__((noreturn)) void MainCpp()
 			}
 		}
 
-		bsp.watchdogRefresh(&hiwdg1);
+		bsp.watchdogRefresh();
 	}
 }

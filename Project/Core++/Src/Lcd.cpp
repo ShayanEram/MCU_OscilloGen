@@ -21,7 +21,7 @@ void Lcd::sendCommand(uint8_t cmd) {
         lowerNibble | LCD_RS_COMMAND
     };
 
-    _bsp.i2cTransmit_Master_IT(&hi2c1, _address, dataT, 4);
+    _bsp.i2cTransmit_Master_IT(_address, dataT, 4);
 }
 
 void Lcd::sendData(uint8_t data) {
@@ -35,7 +35,7 @@ void Lcd::sendData(uint8_t data) {
         lowerNibble | LCD_RS_DATA
     };
 
-    _bsp.i2cTransmit_Master_IT(&hi2c1, _address, dataT, 4);
+    _bsp.i2cTransmit_Master_IT(_address, dataT, 4);
 }
 
 void Lcd::init() {
