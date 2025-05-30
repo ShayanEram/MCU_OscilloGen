@@ -5,13 +5,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Core++/Bsp/Bsp.cpp 
+../Core++/Bsp/Bsp.cpp \
+../Core++/Bsp/BspBM.cpp 
 
 OBJS += \
-./Core++/Bsp/Bsp.o 
+./Core++/Bsp/Bsp.o \
+./Core++/Bsp/BspBM.o 
 
 CPP_DEPS += \
-./Core++/Bsp/Bsp.d 
+./Core++/Bsp/Bsp.d \
+./Core++/Bsp/BspBM.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +24,7 @@ Core++/Bsp/%.o Core++/Bsp/%.su Core++/Bsp/%.cyclo: ../Core++/Bsp/%.cpp Core++/Bs
 clean: clean-Core-2b--2b--2f-Bsp
 
 clean-Core-2b--2b--2f-Bsp:
-	-$(RM) ./Core++/Bsp/Bsp.cyclo ./Core++/Bsp/Bsp.d ./Core++/Bsp/Bsp.o ./Core++/Bsp/Bsp.su
+	-$(RM) ./Core++/Bsp/Bsp.cyclo ./Core++/Bsp/Bsp.d ./Core++/Bsp/Bsp.o ./Core++/Bsp/Bsp.su ./Core++/Bsp/BspBM.cyclo ./Core++/Bsp/BspBM.d ./Core++/Bsp/BspBM.o ./Core++/Bsp/BspBM.su
 
 .PHONY: clean-Core-2b--2b--2f-Bsp
 

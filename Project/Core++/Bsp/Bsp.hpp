@@ -31,7 +31,7 @@ extern "C"
 #include "gpio.h"
 }
 
-class Bsp final: public BspInterface {
+class Bsp : public BspInterface {
 public:
 	static Bsp& getInstance();
 	~Bsp() = default;

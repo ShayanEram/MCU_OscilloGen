@@ -17,6 +17,7 @@
 "./Core/Src/usart.o"
 "./Core/Startup/startup_stm32h723zgtx.o"
 "./Core++/Bsp/Bsp.o"
+"./Core++/Bsp/BspBM.o"
 "./Core++/Src/AnalyzerExtern.o"
 "./Core++/Src/Bootloader.o"
 "./Core++/Src/DacExtern.o"
