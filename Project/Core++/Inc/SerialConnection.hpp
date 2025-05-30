@@ -52,6 +52,13 @@ struct __attribute__((packed)) ReceivedData
 	Oscilloscope analyze;
 };
 
+struct StatusBytes
+{
+	bool ready : 1;
+	bool busy  : 1;
+	bool fault : 1;
+};
+
 class SerialCtn
 {
 public:
