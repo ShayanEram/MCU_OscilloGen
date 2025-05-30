@@ -18,7 +18,7 @@
 constexpr uint8_t Major_Version{1};
 constexpr uint8_t Minor_Version{0};
 
-Bsp bsp;
+Bsp& bsp = Bsp::getInstance(); // Singleton!
 
 FuncAnalyzer analyze(bsp);
 FuncGenerator generate(bsp);
@@ -33,9 +33,21 @@ AnalyzerExt exAnalyze(bsp);
 Dac exDac(bsp);
 #endif
 
-
 __attribute__((noreturn)) void MainCpp()
 {
+	bsp.timPwmPulseCallback = []() { printf("Default TIM PWM Pulse Completed!\n"); };
+	bsp.spiTxCallback = []() { printf("Default SPI TX Completed!\n"); };
+	bsp.spiRxCallback = []() { printf("Default SPI RX Completed!\n"); };
+	bsp.uartTxCallback = []() { printf("Default UART TX Completed!\n"); };
+	bsp.uartRxCallback = [](uint8_t data) { printf("Default UART RX Data: %d\n", data); };
+	bsp.adcConvCallback = []() { printf("Default ADC Conversion Completed!\n"); };
+	bsp.adcHalfConvCallback = []() { printf("Default ADC Half Conversion Completed!\n"); };
+	bsp.timPeriodCallback = []() { printf("Default Timer Period Elapsed!\n"); };
+	bsp.dacConvCallback = []() { printf("Default DAC Conversion Completed!\n"); };
+	bsp.dacHalfConvCallback = []() { printf("Default DAC Half Conversion Completed!\n"); };
+	bsp.i2cTxCallback = []() { printf("Default I2C TX Completed!\n"); };
+	bsp.i2cRxCallback = []() { printf("Default I2C RX Completed!\n"); };
+
 	ReceivedData data;
 	bool dataReceived{false};
 	float32_t fftOutput;

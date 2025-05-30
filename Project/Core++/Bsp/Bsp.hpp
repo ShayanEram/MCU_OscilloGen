@@ -11,7 +11,10 @@
 #define ARM_MATH_CM7
 
 #include "BspInterface.hpp"
+#include <functional>
 
+extern "C"
+{
 #include "main.h"
 #include "adc.h"
 #include "cordic.h"
@@ -26,12 +29,14 @@
 #include "usb_device.h"
 #include "usbd_cdc_if.h"
 #include "gpio.h"
-
+}
 
 class Bsp final: public BspInterface {
 public:
-	explicit Bsp() = default;
+	static Bsp& getInstance();
 	~Bsp() = default;
+
+	using FunctionalCallback = std::function<void()>;
 
 	//PWM-------------------------------------------------------------------------------------------------------------------------
 	Status pwmStart_IT() override;
@@ -95,8 +100,36 @@ public:
 	//Extra--------------------------------------------------------------------------------------------------------------------------
 	void delay(uint32_t Delay) override;
 
+	//Callbacks----------------------------------------------------------------------------------------------------------------------
+	FunctionalCallback timPwmPulseCallback;
+	FunctionalCallback spiTxCallback;
+	FunctionalCallback spiRxCallback;
+	FunctionalCallback uartTxCallback;
+    std::function<void(uint8_t)> uartRxCallback;
+    FunctionalCallback adcConvCallback;
+    FunctionalCallback adcHalfConvCallback;
+    FunctionalCallback timPeriodCallback;
+    FunctionalCallback dacConvCallback;
+    FunctionalCallback dacHalfConvCallback;
+    FunctionalCallback i2cTxCallback;
+    FunctionalCallback i2cRxCallback;
+
+	void handleTimPwmPulseComplete() { if (timPwmPulseCallback) timPwmPulseCallback(); }
+	void handleSpiTxComplete() { if (spiTxCallback) spiTxCallback(); }
+	void handleSpiRxComplete() { if (spiRxCallback) spiRxCallback(); }
+	void handleUartTxComplete() { if (uartTxCallback) uartTxCallback(); }
+	void handleUartRxComplete(uint8_t data) { if (uartRxCallback) uartRxCallback(data); }
+	void handleAdcConvComplete() { if (adcConvCallback) adcConvCallback(); }
+	void handleAdcHalfConvComplete() { if (adcHalfConvCallback) adcHalfConvCallback(); }
+	void handleTimPeriodElapsed() { if (timPeriodCallback) timPeriodCallback(); }
+	void handleDacConvComplete() { if (dacConvCallback) dacConvCallback(); }
+	void handleDacHalfConvComplete() { if (dacHalfConvCallback) dacHalfConvCallback(); }
+	void handleI2cTxComplete() { if (i2cTxCallback) i2cTxCallback(); }
+	void handleI2cRxComplete() { if (i2cRxCallback) i2cRxCallback(); }
 
 private:
+	explicit Bsp() = default;
+
 	Status convertHALStatus(HAL_StatusTypeDef halStatus);
 	Status convertUSBStatus(USBD_StatusTypeDef usbStatus);
 

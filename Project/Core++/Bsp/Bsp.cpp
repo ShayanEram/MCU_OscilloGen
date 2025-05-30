@@ -7,6 +7,11 @@
 
 #include "Bsp.hpp"
 
+Bsp& Bsp::getInstance() {
+    static Bsp instance;
+    return instance;
+}
+
 //PWM--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Status Bsp::pwmStart_IT()
 {
@@ -26,6 +31,11 @@ Status Bsp::pwmStart_DMA(const uint32_t *pData, uint16_t Length)
 Status Bsp::pwmStop_DMA()
 {
 	return convertHALStatus(HAL_TIM_PWM_Stop_DMA(&htim1, TIM_CHANNEL_1));
+}
+
+extern "C" void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
+{
+	Bsp::getInstance().handleTimPwmPulseComplete();
 }
 
 //SPI--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -57,6 +67,16 @@ Status Bsp::spiReceive_DMA(uint8_t *pData, uint16_t Size)
 Status Bsp::spiTransmitReceive_DMA(const uint8_t *pTxData, uint8_t *pRxData, uint16_t Size)
 {
 	return convertHALStatus(HAL_SPI_TransmitReceive_DMA(&hspi1, pTxData, pRxData, Size));
+}
+
+extern "C" void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	Bsp::getInstance().handleSpiTxComplete();
+}
+
+extern "C" void HAL_SPI_RxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	Bsp::getInstance().handleSpiRxComplete();
 }
 
 //GPIO--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -99,6 +119,18 @@ Status Bsp::uartReceive_DMA(uint8_t *pData, uint16_t Size)
 	return convertHALStatus(HAL_UART_Receive_DMA(&huart2, pData, Size));
 }
 
+extern "C" void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
+{
+	Bsp::getInstance().handleUartTxComplete();
+}
+
+extern "C" void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+	uint8_t receivedData;
+	HAL_UART_Receive(huart, &receivedData, 1, 100);
+	Bsp::getInstance().handleUartRxComplete(receivedData);
+}
+
 //USB-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Status Bsp::usbTransmit(uint8_t* Buf, uint16_t Len)
 {
@@ -131,6 +163,16 @@ Status Bsp::adcStopDMA()
 	return convertHALStatus(HAL_ADC_Stop_DMA(&hadc1));
 }
 
+extern "C" void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	Bsp::getInstance().handleAdcConvComplete();
+}
+
+extern "C" void HAL_ADC_ConvHalfCpltCallback(ADC_HandleTypeDef *hadc)
+{
+	Bsp::getInstance().handleAdcHalfConvComplete();
+}
+
 //TIM----------------------------------------------------------------------------------------------------------------------------
 Status Bsp::timStart_IT()
 {
@@ -152,6 +194,11 @@ Status Bsp::timeStopDMA()
 	return convertHALStatus(HAL_TIM_Base_Stop_DMA(&htim2));
 }
 
+extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	Bsp::getInstance().handleTimPeriodElapsed();
+}
+
 //DAC----------------------------------------------------------------------------------------------------------------------------
 Status Bsp::dacStart_DMA(const uint32_t *pData, uint32_t Length)
 {
@@ -161,6 +208,16 @@ Status Bsp::dacStart_DMA(const uint32_t *pData, uint32_t Length)
 Status Bsp::dacStopDMA()
 {
 	return convertHALStatus(HAL_DAC_Stop_DMA(&hdac1, DAC_CHANNEL_1));
+}
+
+extern "C" void HAL_DAC_ConvCpltCallbackCh1(DAC_HandleTypeDef *hdac)
+{
+	Bsp::getInstance().handleDacConvComplete();
+}
+
+extern "C" void HAL_DAC_ConvHalfCpltCallbackCh1(DAC_HandleTypeDef *hdac)
+{
+	Bsp::getInstance().handleDacHalfConvComplete();
 }
 
 //I2C----------------------------------------------------------------------------------------------------------------------------
@@ -182,6 +239,16 @@ Status Bsp::i2cTransmit_Master_DMA(uint16_t DevAddress, uint8_t *pData, uint16_t
 Status Bsp::i2cReceive_Master_DMA(uint16_t DevAddress, uint8_t *pData, uint16_t Size)
 {
 	return convertHALStatus(HAL_I2C_Master_Receive_DMA(&hi2c1, DevAddress, pData, Size));
+}
+
+extern "C" void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	Bsp::getInstance().handleI2cTxComplete();
+}
+
+extern "C" void HAL_I2C_MasterRxCpltCallback(I2C_HandleTypeDef *hi2c)
+{
+	Bsp::getInstance().handleI2cRxComplete();
 }
 
 //wdg----------------------------------------------------------------------------------------------------------------------------
