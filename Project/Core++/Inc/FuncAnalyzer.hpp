@@ -1,17 +1,17 @@
-/*
- * Oscilloscope.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file FuncAnalyzer.hpp
+ * @brief Declaration of the FuncAnalyzer class for function analysis.
+ * This class provides methods to analyze electrical signals, including measuring peak voltage, RMS voltage, duty cycle, performing FFT, applying low-pass filters, and finding maximum peaks.
+ * It uses the Bsp class for hardware interaction and ARM CMSIS DSP library for signal processing.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_FUNCANALYZER_HPP_
 #define INC_FUNCANALYZER_HPP_
 
 #include "Bsp.hpp"
 #include "arm_math.h"
 #include <array>
-
 
 class FuncAnalyzer final {
 public:

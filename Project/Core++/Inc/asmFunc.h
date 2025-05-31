@@ -1,10 +1,10 @@
-/*
- * asmFunc.h
- *
- *  Created on: May 26, 2025
- *      Author: shaya
+/**
+ * @file asmFunc.h
+ * @brief Declaration of assembly functions for signal processing.
+ * This header file declares the `firFilterASM` function, which performs FIR filtering on a signal using assembly language for optimized performance.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_ASMFUNC_H_
 #define INC_ASMFUNC_H_
 

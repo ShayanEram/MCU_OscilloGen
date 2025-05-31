@@ -1,12 +1,11 @@
-/*
- * DacExtern.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
- *
- *      external dac LTC2666
+/**
+ * @file DacExtern.hpp
+ * @brief Declaration of the Dac class for external DAC operations.
+ * This class provides methods to initialize the DAC, convert voltage to code, write data to the DAC, and perform various operations such as testing and no-operation.
+ * It communicates with the DAC via SPI and handles multiple DAC channels.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_DACEXTERN_HPP_
 #define INC_DACEXTERN_HPP_
 

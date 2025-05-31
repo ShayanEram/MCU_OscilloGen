@@ -1,10 +1,11 @@
-/*
- * Signal.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file FuncGenerator.hpp
+ * @brief Declaration of the FuncGenerator class for function generation.
+ * This class provides methods to generate various waveforms (sine, square, triangle, sawtooth), set frequency and amplitude, and manage waveform output.
+ * It uses the Bsp class for hardware interaction and ARM CMSIS DSP library for signal processing.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_FUNCGENERATOR_HPP_
 #define INC_FUNCGENERATOR_HPP_
 

@@ -1,10 +1,9 @@
-/*
- * SerialConnection.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file SerialConnection.hpp
+ * @brief Declaration of the SerialCtn class for serial communication.
+ * This class provides methods to handle serial communication with a device, including sending and receiving data, processing received data, and managing different modes of operation.
+ * It uses the USB and defines structures for function generation and oscilloscopes.
  */
-
 #ifndef INC_SERIALCONNECTION_HPP_
 #define INC_SERIALCONNECTION_HPP_
 
@@ -67,7 +66,6 @@ public:
 
 	Status interfaceHandshake(uint8_t major, uint8_t minor);
 	ReceivedData processReceivedData();
-
 
 private:
 	Bsp& _bsp;

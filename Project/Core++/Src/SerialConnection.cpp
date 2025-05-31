@@ -1,12 +1,9 @@
-/*
- * SerialConnection.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file SerialConnection.cpp
+ * @author Shayan Eram
  */
 #include "SerialConnection.hpp"
 #include <algorithm>
-
 
 uint8_t UsbRxDataBuffer[USB_RX_BUFF_SIZE];
 
@@ -56,7 +53,7 @@ ReceivedData SerialCtn::processReceivedData()
 			data.analyze.filter = dataReceived[3];
 		}
 	}
-	else // Invalid command
+	else
 	{
 		printf("DEV_ERROR: Invalide command was received");
 		return {};

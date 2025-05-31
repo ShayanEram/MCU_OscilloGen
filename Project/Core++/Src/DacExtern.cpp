@@ -1,10 +1,7 @@
-/*
- * DacExtern.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file DacExtern.cpp
+ * @author Shayan Eram
  */
-
 #include "DacExtern.hpp"
 #include "arm_math.h"
 

@@ -1,12 +1,11 @@
-/*
- * AdcExtern.hpp
- *
- *  Created on: May 9, 2025
- *      Author: shaya
- *
- *      FPGA for processing using UART
+/**
+ * @file AnalyzerExtern.hpp
+ * @brief Declaration of the AnalyzerExt class for external analyzer operations.
+ * This class provides methods to request various analysis operations such as FFT, filtering, edge detection, modulation, and waveform analysis.
+ * It communicates with the FPGA via UART.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_ANALYZEREXTERN_HPP_
 #define INC_ANALYZEREXTERN_HPP_
 

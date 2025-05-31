@@ -1,11 +1,8 @@
-/*
- * Signal.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file FuncGenerator.cpp
+ * @author Shayan Eram
  */
-
-#include <FuncGenerator.hpp>
+#include "FuncGenerator.hpp"
 
 FuncGenerator::FuncGenerator(Bsp& bsp) : _bsp(bsp)
 {

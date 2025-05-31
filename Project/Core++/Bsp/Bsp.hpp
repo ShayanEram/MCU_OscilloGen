@@ -1,10 +1,10 @@
-/*
- * IBsp.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file: BspStm.hpp
+ * @brief: Bsp class implementation for STM32
+ * This class provides an interface for various hardware functionalities such as PWM, SPI, GPIO, UART, USB, ADC, TIM, DAC, I2C, watchdog, and CORDIC operations.
+ * 
+ * @author: Shayan Eram
  */
-
 #ifndef BSP_INC_BSP_HPP_
 #define BSP_INC_BSP_HPP_
 

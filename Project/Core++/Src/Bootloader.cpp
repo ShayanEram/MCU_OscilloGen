@@ -1,10 +1,7 @@
-/*
- * Bootloader.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file Bootloader.cpp
+ * @author Shayan Eram
  */
-
 #include "Bootloader.hpp"
 
 Bootloader::Bootloader(UART_HandleTypeDef& huart) : _huart(huart) {}

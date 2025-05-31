@@ -1,10 +1,7 @@
-/*
- * BspStm.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file: BspStm.cpp
+ * @author: Shayan Eram
  */
-
 #include "Bsp.hpp"
 
 Bsp& Bsp::getInstance() {

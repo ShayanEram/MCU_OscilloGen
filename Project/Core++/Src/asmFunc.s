@@ -1,10 +1,7 @@
 /*
  * asmFunc.s
- *
- *  Created on: May 26, 2025
- *      Author: shaya
+ * author: Shayan Eram
  */
-
 .syntax unified
 .text
 .global firFilterASM

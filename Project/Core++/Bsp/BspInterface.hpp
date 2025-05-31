@@ -1,10 +1,8 @@
-/*
- * BspInterface.hpp
- *
- *  Created on: May 27, 2025
- *      Author: shaya
+/**
+ * @file BspInterface.hpp
+ * @brief BspInterface class definition
+ * @author Shayan Eram
  */
-
 #ifndef BSP_BSPINTERFACE_HPP_
 #define BSP_BSPINTERFACE_HPP_
 

@@ -1,3 +1,7 @@
+/**
+ * @file MainCpp.cpp
+ * @author Shayan Eram
+ */
 #include "Bsp.hpp"
 #include "MainCpp.hpp"
 #include "main.h"
@@ -9,7 +13,6 @@
 #include "FuncGenerator.hpp"
 #include "Lcd.hpp"
 #include "SerialConnection.hpp"
-
 
 #define USE_EXTERN_ADC
 #define USE_EXTERN_DAC

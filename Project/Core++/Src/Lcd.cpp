@@ -1,12 +1,8 @@
-/*
- * Lcd.cpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file Lcd.cpp
+ * @author Shayan Eram
  */
-
 #include "Lcd.hpp"
-
 
 Lcd::Lcd(Bsp& bsp, uint8_t address) : _bsp(bsp), _address(address) {}
 

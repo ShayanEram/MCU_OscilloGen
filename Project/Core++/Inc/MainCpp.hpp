@@ -1,10 +1,10 @@
-/*
- * MainCpp.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file MainCpp.hpp
+ * @brief Declaration of the MainCpp function.
+ * This function serves as the entry point for the C++ application, initializing necessary components and starting the main loop.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_MAINCPP_HPP_
 #define INC_MAINCPP_HPP_
 

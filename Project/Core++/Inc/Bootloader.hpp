@@ -1,10 +1,10 @@
-/*
- * Bootloader.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file Bootloader.hpp
+ * @brief Declaration of the Bootloader class for firmware management.
+ * This class provides methods to run the bootloader, receive firmware, erase flash memory, write to flash, and jump to the application.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_BOOTLOADER_HPP_
 #define INC_BOOTLOADER_HPP_
 

@@ -1,10 +1,7 @@
-/*
- * AdcExtern.cpp
- *
- *  Created on: May 9, 2025
- *      Author: shaya
+/**
+ * @file AnalyzerExtern.cpp
+ * @author Shayan Eram
  */
-
 #include "AnalyzerExtern.hpp"
 
 AnalyzerExt::AnalyzerExt(Bsp& bsp): _bsp(bsp){}

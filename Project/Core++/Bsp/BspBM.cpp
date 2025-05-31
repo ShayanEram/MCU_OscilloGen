@@ -1,15 +1,8 @@
-/*
- * BspBM.cpp
- *
- *  Created on: May 29, 2025
- *      Author: shaya
+/**
+ * @file BspBM.cpp
+ * @author Shayan Eram
  */
-
 #include "BspBM.hpp"
-
-#define TRIGGER_TIMER_PSC    160  // slow clock to 0.1MHz --> 16 MHz/160
-#define TRIGGER_TIMER_ARR    7000 // 70ms --> 0.1MHz * 70ms
-#define TRIGGER_TIMER_DC	 50
 
 void BspBM::pwmStart()
 {
@@ -80,7 +73,8 @@ void BspBM::spiTransmit(const uint8_t *pData, uint16_t Size)
 	}
 }
 
-void BspBM::spiReceive(uint8_t *pData, uint16_t Size) {
+void BspBM::spiReceive(uint8_t *pData, uint16_t Size)
+{
 	for (uint16_t i = 0; i < Size; ++i)
 	{
 		while (!(SPI1->SR & SPI_SR_RXP)); // Wait until received data is available
@@ -95,96 +89,139 @@ Status BspBM::gpioWrite(uint16_t GPIO_Pin, bool PinState)
 	return Status::OK;
 }
 
-bool BspBM::gpioRead(uint16_t GPIO_Pin) {
+bool BspBM::gpioRead(uint16_t GPIO_Pin)
+{
     return (GPIOA->IDR & (1 << GPIO_Pin)) ? true : false;
 }
 
+void BspBM::uartInit()
+{
+	// Enable clock for USART2 and GPIOA
+	RCC->APB1LENR |= RCC_APB1LENR_USART2EN;
+	RCC->AHB4ENR |= RCC_AHB4ENR_GPIOAEN;
 
-void BspBM::uartTransmit(const uint8_t *pData, uint16_t Size) {
-//    for (uint16_t i = 0; i < Size; i++) {
-//        while (!(USART2->ISR & USART_ISR_TXE)); // Wait for TX buffer empty
-//        USART2->TDR = pData[i]; // Send data
-//    }
+	// Configure PA2 (TX) and PA3 (RX) as alternate function
+	GPIOA->MODER &= ~(GPIO_MODER_MODE2 | GPIO_MODER_MODE3);
+	GPIOA->MODER |= (GPIO_MODER_MODE2_1 | GPIO_MODER_MODE3_1);
+	GPIOA->AFR[0] |= (7 << GPIO_AFRL_AFSEL2_Pos) | (7 << GPIO_AFRL_AFSEL3_Pos); // AF7 for USART2
+
+	// Configure USART2
+	USART2->BRR = UART_PERIPH_CLOCK / UART_BAUDRATE; 	// Baud rate (assuming 4MHz clock)
+	USART2->CR1 |= USART_CR1_TE | USART_CR1_RE; 		// Enable TX and RX
+	USART2->CR1 |= USART_CR1_UE; 						// Enable USART
 }
 
+void BspBM::uartTransmit(const uint8_t *pData, uint16_t Size)
+{
+	for (uint16_t i = 0; i < Size; ++i)
+	{
+		while (!(USART2->ISR & USART_ISR_TXFT)); 		// Wait until TX FIFO threshold is met
+		USART2->TDR = pData[i]; 						// Send data
+	}
+}
 
 void BspBM::uartReceive(uint8_t *pData, uint16_t Size) {
-//    for (uint16_t i = 0; i < Size; i++) {
-//        while (!(USART2->ISR & USART_ISR_RXNE)); // Wait for RX buffer full
-//        pData[i] = USART2->RDR; // Read received data
-//    }
+    for (uint16_t i = 0; i < Size; i++)
+    {
+    	while (!(USART2->ISR & USART_ISR_RXFT)); 		// Wait until RX FIFO threshold is met
+        pData[i] = USART2->RDR; 						// Read received data
+    }
 }
 
-// **ADC Start**
-void BspBM::adcStart() {
-//    ADC1->CR |= ADC_CR_ADSTART; // Start ADC conversion
+void BspBM::adcInit()
+{
+	// Enable ADC clock
+	RCC->AHB1ENR |= RCC_AHB1ENR_ADC12EN;
+
+	// Configure ADC settings
+	ADC1->CR &= ~ADC_CR_DEEPPWD; 					// Disable deep power-down mode
+	ADC1->CR |= ADC_CR_ADVREGEN; 					// Enable ADC voltage regulator
+	for (uint16_t i = 0; i < 1000; ++i); 			// Short delay for stabilization
+
+	// Configure resolution and data alignment
+	ADC1->CFGR |= ADC_CFGR_RES_0; 					// 12-bit resolution
+	ADC1->CFGR &= ~ADC3_CFGR_ALIGN_Msk; 			// Right-aligned data
+
+	// Select input channel (channel 1)
+	ADC1->SQR1 |= (1 << ADC_SQR1_SQ1_Pos); 			// Set channel 1 in sequence
+
+	// Enable ADC
+	ADC1->CR |= ADC_CR_ADEN;
+	while (!(ADC1->ISR & ADC_ISR_ADRDY)); 			// Wait until ADC is ready
 }
 
-// **ADC Stop**
-void BspBM::adcStop() {
-//    ADC1->CR |= ADC_CR_ADSTP; // Stop ADC conversion
+void BspBM::adcStart()
+{
+    ADC1->CR |= ADC_CR_ADSTART; 					// Start ADC conversion
 }
 
-// **Timer Start**
-void BspBM::timStart() {
-//    TIM2->CR1 |= TIM_CR1_CEN; // Enable timer
+void BspBM::adcStop()
+{
+    ADC1->CR |= ADC_CR_ADSTP; 						// Stop ADC conversion
+    while (ADC1->CR & ADC_CR_ADSTP); 				// Wait until stop is complete
 }
 
-// **Timer Stop**
-void BspBM::timStop() {
-//    TIM2->CR1 &= ~TIM_CR1_CEN; // Disable timer
+void BspBM::dacInit()
+{
+    // Enable DAC clock
+    RCC->APB1LENR |= RCC_APB1LENR_DAC12EN; 			// Enable DAC1 clock
+
+    // Configure DAC output pin (example: PA4 for DAC1_OUT1)
+    GPIOA->MODER |= GPIO_MODER_MODE4; 				// Set PA4 as analog mode
+
+    // Enable DAC
+    DAC1->CR |= DAC_CR_EN1; // Enable DAC channel 1
 }
 
-// **DAC Start**
-void BspBM::dacStart(const uint32_t *pData, uint32_t Length) {
-//    for (uint32_t i = 0; i < Length; i++) {
-//        DAC1->DHR12R1 = pData[i]; // Load data into DAC register
-//    }
-//    DAC1->CR |= DAC_CR_EN1; // Enable DAC channel
+void BspBM::dacStart(const uint32_t *pData, uint32_t Length)
+{
+    for (uint32_t i = 0; i < Length; i++) {
+        DAC1->DHR12R1 = pData[i]; 					// Load data into DAC register
+    }
 }
 
-// **DAC Stop**
 void BspBM::dacStop() {
-//    DAC1->CR &= ~DAC_CR_EN1; // Disable DAC channel
+    DAC1->CR &= ~DAC_CR_EN1; 						// Disable DAC channel
 }
 
-// **I2C Transmit (Polling Mode)**
+void BspBM::i2cInit_Master()
+{
+	// Enable I2C1 and GPIOB clocks
+	RCC->APB1LENR |= RCC_APB1LENR_I2C1EN;
+	RCC->AHB4ENR |= RCC_AHB4ENR_GPIOBEN;
+
+	// Configure PB6 (SCL) and PB7 (SDA) as alternate function
+	GPIOB->MODER &= ~(GPIO_MODER_MODE6 | GPIO_MODER_MODE7);
+	GPIOB->MODER |= (GPIO_MODER_MODE6_1 | GPIO_MODER_MODE7_1);
+	GPIOB->AFR[0] |= (4 << GPIO_AFRL_AFSEL6_Pos) | (4 << GPIO_AFRL_AFSEL7_Pos); // AF4 for I2C1
+
+	// Configure I2C timing (100kHz standard mode)
+	I2C1->TIMINGR = 0x20303E5D; 	// Timing value for 100kHz
+
+	// Enable I2C and configure master mode
+	I2C1->CR1 |= I2C_CR1_PE; 		// Enable I2C peripheral
+}
+
 void BspBM::i2cTransmit_Master(uint16_t DevAddress, uint8_t *pData, uint16_t Size) {
-//    I2C1->CR2 = (DevAddress << 1) | (Size << 16) | I2C_CR2_START;
-//    for (uint16_t i = 0; i < Size; i++) {
-//        while (!(I2C1->ISR & I2C_ISR_TXE)); // Wait for TX buffer empty
-//        I2C1->TXDR = pData[i]; // Send data
-//    }
-//    I2C1->CR2 |= I2C_CR2_STOP; // Stop transmission
+    I2C1->CR2 = (DevAddress << 1) | (Size << I2C_CR2_NBYTES_Pos) | I2C_CR2_START;
+
+    for (uint16_t i = 0; i < Size; i++)
+    {
+        while (!(I2C1->ISR & I2C_ISR_TXE)); // Wait for TX buffer empty
+        I2C1->TXDR = pData[i]; 				// Send data
+    }
+    while (!(I2C1->ISR & I2C_ISR_TC)); 		// Wait for transfer complete
+    I2C1->CR2 |= I2C_CR2_STOP; 				// Stop transmission
 }
 
-// **I2C Receive (Polling Mode)**
 void BspBM::i2cReceive_Master(uint16_t DevAddress, uint8_t *pData, uint16_t Size) {
-//    I2C1->CR2 = (DevAddress << 1) | (Size << 16) | I2C_CR2_START | I2C_CR2_RD_WRN;
-//    for (uint16_t i = 0; i < Size; i++) {
-//        while (!(I2C1->ISR & I2C_ISR_RXNE)); // Wait for RX buffer full
-//        pData[i] = I2C1->RXDR; // Read received data
-//    }
-//    I2C1->CR2 |= I2C_CR2_STOP; // Stop reception
-}
+    I2C1->CR2 = (DevAddress << 1) | (Size << I2C_CR2_NBYTES_Pos) | I2C_CR2_START | I2C_CR2_RD_WRN;
 
-// **Watchdog Start**
-Status BspBM::watchdogStart() {
-//    IWDG->KR = 0x5555; // Unlock IWDG registers
-//    IWDG->PR = 0x03;   // Set prescaler
-//    IWDG->RLR = 0x0FFF; // Set reload value
-//    IWDG->KR = 0xCCCC; // Start watchdog
-}
-
-// **Watchdog Refresh**
-Status BspBM::watchdogRefresh() {
-//    IWDG->KR = 0xAAAA; // Refresh watchdog counter
-}
-
-// **Delay (Blocking Mode Using TIM)**
-void BspBM::delay(uint32_t Delay) {
-//    TIM6->CNT = 0;
-//    TIM6->CR1 |= TIM_CR1_CEN;
-//    while (TIM6->CNT < Delay);
-//    TIM6->CR1 &= ~TIM_CR1_CEN;
+    for (uint16_t i = 0; i < Size; i++)
+    {
+        while (!(I2C1->ISR & I2C_ISR_RXNE)); 	// Wait for RX buffer full
+        pData[i] = I2C1->RXDR; 					// Read received data
+    }
+    while (!(I2C1->ISR & I2C_ISR_TC)); 			// Wait for transfer complete
+    I2C1->CR2 |= I2C_CR2_STOP; 					// Stop reception
 }

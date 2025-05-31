@@ -1,10 +1,11 @@
-/*
- * Lcd.hpp
- *
- *  Created on: May 8, 2025
- *      Author: shaya
+/**
+ * @file Lcd.hpp
+ * @brief Declaration of the Lcd class for LCD operations.
+ * This class provides methods to initialize the LCD, clear the display, set the cursor position, and send strings or characters to the LCD.
+ * It communicates with the LCD via I2C and supports multiple lines.
+ * 
+ * @author Shayan Eram
  */
-
 #ifndef INC_LCD_HPP_
 #define INC_LCD_HPP_
 
@@ -12,7 +13,6 @@
 #include <array>
 
 constexpr int16_t SLAVE_ADDRESS = 0x4E;
-
 
 class Lcd final {
 public:
