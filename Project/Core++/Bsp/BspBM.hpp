@@ -26,6 +26,7 @@ public:
 	void pwmStop();
 
 	//SPI-------------------------------------------------------------------------------------------------------------------------
+	void spiInit();
 	void spiTransmit(const uint8_t *pData, uint16_t Size);
 	void spiReceive(uint8_t *pData, uint16_t Size);
 
