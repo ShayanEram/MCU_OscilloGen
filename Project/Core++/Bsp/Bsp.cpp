@@ -181,12 +181,12 @@ Status Bsp::timStop_IT()
 	return convertHALStatus(HAL_TIM_Base_Stop_IT(&htim2));
 }
 
-Status Bsp::timeStart_DMA(const uint32_t *pData, uint16_t Length)
+Status Bsp::timStart_DMA(const uint32_t *pData, uint16_t Length)
 {
 	return convertHALStatus(HAL_TIM_Base_Start_DMA(&htim2, pData, Length));
 }
 
-Status Bsp::timeStopDMA()
+Status Bsp::timStopDMA()
 {
 	return convertHALStatus(HAL_TIM_Base_Stop_DMA(&htim2));
 }
@@ -361,6 +361,69 @@ Status Bsp::convertUSBStatus(USBD_StatusTypeDef usbStatus)
 			return Status::ERROR;
 	}
 }
+
+// ISR handlers (set flags only)
+void Bsp::handleTimPwmPulseComplete() 			{ timPwmPulseFlag = true; }
+void Bsp::handleSpiTxComplete()       			{ spiTxFlag = true; }
+void Bsp::handleSpiRxComplete()       			{ spiRxFlag = true; }
+void Bsp::handleUartTxComplete()      			{ uartTxFlag = true; }
+void Bsp::handleUartRxComplete(uint8_t data) 	{ uartRxData = data; uartRxFlag = true; }
+void Bsp::handleAdcConvComplete()     			{ adcConvFlag = true; }
+void Bsp::handleAdcHalfConvComplete() 			{ adcHalfConvFlag = true; }
+void Bsp::handleTimPeriodElapsed()    			{ timPeriodFlag = true; }
+void Bsp::handleDacConvComplete()     			{ dacConvFlag = true; }
+void Bsp::handleDacHalfConvComplete() 			{ dacHalfConvFlag = true; }
+void Bsp::handleI2cTxComplete()       			{ i2cTxFlag = true; }
+void Bsp::handleI2cRxComplete()       			{ i2cRxFlag = true; }
+
+// Dispatch events in their own function
+void Bsp::dispatchEvents() {
+    if (timPwmPulseFlag) { timPwmPulseFlag = false; if (timPwmPulseCallback) timPwmPulseCallback(); }
+    if (spiTxFlag)       { spiTxFlag = false;       if (spiTxCallback) spiTxCallback(); }
+    if (spiRxFlag)       { spiRxFlag = false;       if (spiRxCallback) spiRxCallback(); }
+    if (uartTxFlag)      { uartTxFlag = false;      if (uartTxCallback) uartTxCallback(); }
+    if (uartRxFlag)      { uartRxFlag = false;      if (uartRxCallback) uartRxCallback(uartRxData); }
+    if (adcConvFlag)     { adcConvFlag = false;     if (adcConvCallback) adcConvCallback(); }
+    if (adcHalfConvFlag) { adcHalfConvFlag = false; if (adcHalfConvCallback) adcHalfConvCallback(); }
+    if (timPeriodFlag)   { timPeriodFlag = false;   if (timPeriodCallback) timPeriodCallback(); }
+    if (dacConvFlag)     { dacConvFlag = false;     if (dacConvCallback) dacConvCallback(); }
+    if (dacHalfConvFlag) { dacHalfConvFlag = false; if (dacHalfConvCallback) dacHalfConvCallback(); }
+    if (i2cTxFlag)       { i2cTxFlag = false;       if (i2cTxCallback) i2cTxCallback(); }
+    if (i2cRxFlag)       { i2cRxFlag = false;       if (i2cRxCallback) i2cRxCallback(); }
+}
+
+// Default handlers (just printf for now)
+void Bsp::onTimPwmPulseFinished() { std::printf("TIM PWM Pulse Completed!\n"); }
+void Bsp::onSpiTxComplete()       { std::printf("SPI TX Completed!\n"); }
+void Bsp::onSpiRxComplete()       { std::printf("SPI RX Completed!\n"); }
+void Bsp::onUartTxComplete()      { std::printf("UART TX Completed!\n"); }
+void Bsp::onUartRx(uint8_t data)  { std::printf("UART RX Byte: %u\n", data); }
+void Bsp::onAdcConvComplete()     { std::printf("ADC Conversion Completed!\n"); }
+void Bsp::onAdcHalfConvComplete() { std::printf("ADC Half Conversion Completed!\n"); }
+void Bsp::onTimPeriodElapsed()    { std::printf("TIM Period Elapsed!\n"); }
+void Bsp::onDacConvComplete()     { std::printf("DAC Conversion Completed!\n"); }
+void Bsp::onDacHalfConvComplete() { std::printf("DAC Half Conversion Completed!\n"); }
+void Bsp::onI2cTxComplete()       { std::printf("I2C TX Completed!\n"); }
+void Bsp::onI2cRxComplete()       { std::printf("I2C RX Completed!\n"); }
+
+// Wire default handlers to callbacks (no lambdas needed)
+void Bsp::registerDefaultCallbacks() {
+    using namespace std::placeholders;
+
+    timPwmPulseCallback = std::bind(&Bsp::onTimPwmPulseFinished, this);
+    spiTxCallback       = std::bind(&Bsp::onSpiTxComplete, this);
+    spiRxCallback       = std::bind(&Bsp::onSpiRxComplete, this);
+    uartTxCallback      = std::bind(&Bsp::onUartTxComplete, this);
+    uartRxCallback      = std::bind(&Bsp::onUartRx, this, _1);
+    adcConvCallback     = std::bind(&Bsp::onAdcConvComplete, this);
+    adcHalfConvCallback = std::bind(&Bsp::onAdcHalfConvComplete, this);
+    timPeriodCallback   = std::bind(&Bsp::onTimPeriodElapsed, this);
+    dacConvCallback     = std::bind(&Bsp::onDacConvComplete, this);
+    dacHalfConvCallback = std::bind(&Bsp::onDacHalfConvComplete, this);
+    i2cTxCallback       = std::bind(&Bsp::onI2cTxComplete, this);
+    i2cRxCallback       = std::bind(&Bsp::onI2cRxComplete, this);
+}
+
 
 /**
  * Use printf/std::cout to send usb data

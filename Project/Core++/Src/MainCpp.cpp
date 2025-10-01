@@ -36,162 +36,109 @@ AnalyzerExt exAnalyze(bsp);
 Dac exDac(bsp);
 #endif
 
-void callbacks()
-{
-	bsp.timPwmPulseCallback = []()
-	{
-		printf("DEV: Default TIM PWM Pulse Completed!\n");
-	};
-	//----
-	bsp.spiTxCallback = []()
-	{
-		printf("DEV: Default SPI TX Completed!\n");
-	};
-	bsp.spiRxCallback = []()
-	{
-		printf("DEV: Default SPI RX Completed!\n");
-	};
-	//----
-	bsp.uartTxCallback = []()
-	{
-		printf("DEV: Default UART TX Completed!\n");
-	};
-	bsp.uartRxCallback = [](uint8_t data)
-	{
-		printf("DEV: Default UART RX Data: %d\n", data);
-	};
-	//----
-	bsp.adcConvCallback = []()
-	{
-		printf("DEV: Default ADC Conversion Completed!\n");
-	};
-	bsp.adcHalfConvCallback = []()
-	{
-		printf("DEV: Default ADC Half Conversion Completed!\n");
-	};
-	//----
-	bsp.timPeriodCallback = []()
-	{
-		printf("DEV: Default Timer Period Elapsed!\n");
-	};
-	//----
-	bsp.dacConvCallback = []()
-	{
-		printf("DEV: Default DAC Conversion Completed!\n");
-	};
-	bsp.dacHalfConvCallback = []()
-	{
-		printf("DEV: Default DAC Half Conversion Completed!\n");
-	};
-	//----
-	bsp.i2cTxCallback = []()
-	{
-		printf("DEV: Default I2C TX Completed!\n");
-	};
-	bsp.i2cRxCallback = []()
-	{
-		printf("DEV: Default I2C RX Completed!\n");
-	};
-}
 
 __attribute__((noreturn)) void MainCpp()
 {
 
-	ReceivedData data;
-	bool dataReceived{false};
-	float32_t fftOutput;
-	const uint32_t DELAY = 1000;
-
-
-	bool interface{false};
-	do
-	{
-		Status status = connection.interfaceHandshake(Major_Version, Minor_Version);
-		if (status == Status::OK) {
-			interface = true;
-		}
-		bsp.delay(DELAY);
-
-	} while (!interface);
-
-
-	lcd.init();
-	lcd.sendString("LCD Online");
-
-	bsp.watchdogStart();
-
-	while(true)
-	{
-		if(usbReceivedFlag)
-		{
-			data = connection.processReceivedData();
-			usbReceivedFlag = false;
-			dataReceived = true;
-
-			if(data.mode == FUNCTION_GENERATOR_MODE)
-			{
-				generate.selectWaveform(data.generate.signalType);
-				generate.setAmplitude(data.generate.amplitude);
-				generate.setFrequency(data.generate.amplitude);
-				generate.generateWaveforms();
-				generate.startWaveformOutput();
-			}
-			else if(data.mode == OSCILLOSCOPE_MODE)
-			{
-				generate.stopWaveformOutput();
-
-				#ifdef USE_EXTERN_DAC
-				exDac.noOperation();
-				#endif
-
-				analyze.startAnalysing();
-			}
-			else if(data.mode == UPDATE_MODE)
-			{
-				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
-				dataReceived = false;
-			}
-			else
-			{
-				printf("DEV_ERROR: Incorrect mode selected!\n");
-				dataReceived = false;
-			}
-		}
-		else if(dataReceived)
-		{
-			if(data.mode == FUNCTION_GENERATOR_MODE)
-			{
-				generate.startWaveformOutput();
-
-				#ifdef USE_EXTERN_DAC
-				exDac.voltageToCode(3.3, -6, 6);
-				#endif
-			}
-			else if(data.mode == OSCILLOSCOPE_MODE)
-			{
-				if(data.analyze.stop)
-				{
-					analyze.stopAnalyzing();
-				}
-				else if(data.analyze.fft)
-				{
-					analyze.computeFFT(&fftOutput);
-
-					#ifdef USE_EXTERN_ADC
-					exAnalyze.requestFFT();
-					#endif
-				}
-			}
-			else if(data.mode == UPDATE_MODE)
-			{
-				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
-			}
-			else
-			{
-				printf("DEV_ERROR: Incorrect mode selected!\n");
-			}
-		}
-
-		bsp.watchdogRefresh();
-	}
+//	bsp.registerDefaultCallbacks();
+//
+//	ReceivedData data;
+//	bool dataReceived{false};
+//	float32_t fftOutput;
+//	const uint32_t DELAY = 1000;
+//
+//
+//	bool interface{false};
+//	do
+//	{
+//		Status status = connection.interfaceHandshake(Major_Version, Minor_Version);
+//		if (status == Status::OK) {
+//			interface = true;
+//		}
+//		bsp.delay(DELAY);
+//
+//	} while (!interface);
+//
+//
+//	lcd.init();
+//	lcd.sendString("LCD Online");
+//
+//	bsp.watchdogStart();
+//
+//	while(true)
+//	{
+//		bsp.dispatchEvents(); // process callbacks
+//
+//		if(usbReceivedFlag)
+//		{
+//			data = connection.processReceivedData();
+//			usbReceivedFlag = false;
+//			dataReceived = true;
+//
+//			if(data.mode == FUNCTION_GENERATOR_MODE)
+//			{
+//				generate.selectWaveform(data.generate.signalType);
+//				generate.setAmplitude(data.generate.amplitude);
+//				generate.setFrequency(data.generate.amplitude);
+//				generate.generateWaveforms();
+//				generate.startWaveformOutput();
+//			}
+//			else if(data.mode == OSCILLOSCOPE_MODE)
+//			{
+//				generate.stopWaveformOutput();
+//
+//				#ifdef USE_EXTERN_DAC
+//				exDac.noOperation();
+//				#endif
+//
+//				analyze.startAnalysing();
+//			}
+//			else if(data.mode == UPDATE_MODE)
+//			{
+//				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
+//				dataReceived = false;
+//			}
+//			else
+//			{
+//				printf("DEV_ERROR: Incorrect mode selected!\n");
+//				dataReceived = false;
+//			}
+//		}
+//		else if(dataReceived)
+//		{
+//			if(data.mode == FUNCTION_GENERATOR_MODE)
+//			{
+//				generate.startWaveformOutput();
+//
+//				#ifdef USE_EXTERN_DAC
+//				exDac.voltageToCode(3.3, -6, 6);
+//				#endif
+//			}
+//			else if(data.mode == OSCILLOSCOPE_MODE)
+//			{
+//				if(data.analyze.stop)
+//				{
+//					analyze.stopAnalyzing();
+//				}
+//				else if(data.analyze.fft)
+//				{
+//					analyze.computeFFT(&fftOutput);
+//
+//					#ifdef USE_EXTERN_ADC
+//					exAnalyze.requestFFT();
+//					#endif
+//				}
+//			}
+//			else if(data.mode == UPDATE_MODE)
+//			{
+//				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
+//			}
+//			else
+//			{
+//				printf("DEV_ERROR: Incorrect mode selected!\n");
+//			}
+//		}
+//
+//		bsp.watchdogRefresh();
+//	}
 }

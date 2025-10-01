@@ -61,8 +61,8 @@ protected:
     // TIM----------------------------------------------------------------------------------------------------------------------------
     virtual Status timStart_IT() = 0;
     virtual Status timStop_IT() = 0;
-    virtual Status timeStart_DMA(const uint32_t *pData, uint16_t Length) = 0;
-    virtual Status timeStopDMA() = 0;
+    virtual Status timStart_DMA(const uint32_t *pData, uint16_t Length) = 0;
+    virtual Status timStopDMA() = 0;
 
     // DAC----------------------------------------------------------------------------------------------------------------------------
     virtual Status dacStart_DMA(const uint32_t *pData, uint32_t Length) = 0;

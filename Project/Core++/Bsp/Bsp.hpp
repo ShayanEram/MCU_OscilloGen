@@ -31,12 +31,12 @@ extern "C"
 #include "gpio.h"
 }
 
+using FunctionalCallback = std::function<void()>;
+
 class Bsp : public BspInterface {
 public:
 	static Bsp& getInstance();
 	~Bsp() = default;
-
-	using FunctionalCallback = std::function<void()>;
 
 	//PWM-------------------------------------------------------------------------------------------------------------------------
 	Status pwmStart_IT() override;
@@ -76,8 +76,8 @@ public:
 	//TIM----------------------------------------------------------------------------------------------------------------------------
 	Status timStart_IT() override;
 	Status timStop_IT() override;
-	Status timeStart_DMA(const uint32_t *pData, uint16_t Length) override;
-	Status timeStopDMA() override;
+	Status timStart_DMA(const uint32_t *pData, uint16_t Length) override;
+	Status timStopDMA() override;
 
 	//DAC----------------------------------------------------------------------------------------------------------------------------
 	Status dacStart_DMA(const uint32_t *pData, uint32_t Length) override;
@@ -114,24 +114,57 @@ public:
     FunctionalCallback i2cTxCallback;
     FunctionalCallback i2cRxCallback;
 
-	void handleTimPwmPulseComplete() { if (timPwmPulseCallback) timPwmPulseCallback(); }
-	void handleSpiTxComplete() { if (spiTxCallback) spiTxCallback(); }
-	void handleSpiRxComplete() { if (spiRxCallback) spiRxCallback(); }
-	void handleUartTxComplete() { if (uartTxCallback) uartTxCallback(); }
-	void handleUartRxComplete(uint8_t data) { if (uartRxCallback) uartRxCallback(data); }
-	void handleAdcConvComplete() { if (adcConvCallback) adcConvCallback(); }
-	void handleAdcHalfConvComplete() { if (adcHalfConvCallback) adcHalfConvCallback(); }
-	void handleTimPeriodElapsed() { if (timPeriodCallback) timPeriodCallback(); }
-	void handleDacConvComplete() { if (dacConvCallback) dacConvCallback(); }
-	void handleDacHalfConvComplete() { if (dacHalfConvCallback) dacHalfConvCallback(); }
-	void handleI2cTxComplete() { if (i2cTxCallback) i2cTxCallback(); }
-	void handleI2cRxComplete() { if (i2cRxCallback) i2cRxCallback(); }
+    void handleTimPwmPulseComplete();
+    void handleSpiTxComplete();
+    void handleSpiRxComplete();
+    void handleUartTxComplete();
+    void handleUartRxComplete(uint8_t data);
+    void handleAdcConvComplete();
+    void handleAdcHalfConvComplete();
+    void handleTimPeriodElapsed();
+    void handleDacConvComplete();
+    void handleDacHalfConvComplete();
+    void handleI2cTxComplete();
+    void handleI2cRxComplete();
+
+    void dispatchEvents(); // Dispatch function to be called in main loop
+
+    // Default handlers
+    void onTimPwmPulseFinished();
+	void onSpiTxComplete();
+	void onSpiRxComplete();
+	void onUartTxComplete();
+	void onUartRx(uint8_t data);
+	void onAdcConvComplete();
+	void onAdcHalfConvComplete();
+	void onTimPeriodElapsed();
+	void onDacConvComplete();
+	void onDacHalfConvComplete();
+	void onI2cTxComplete();
+	void onI2cRxComplete();
+
+	void registerDefaultCallbacks(); // Helper to wire default handlers to callbacks
 
 private:
 	explicit Bsp() = default;
 
 	Status convertHALStatus(HAL_StatusTypeDef halStatus);
 	Status convertUSBStatus(USBD_StatusTypeDef usbStatus);
+
+	// Event flags
+	volatile bool timPwmPulseFlag 	= false;
+	volatile bool spiTxFlag 		= false;
+	volatile bool spiRxFlag 		= false;
+	volatile bool uartTxFlag 		= false;
+	volatile bool adcConvFlag 		= false;
+	volatile bool adcHalfConvFlag 	= false;
+	volatile bool timPeriodFlag 	= false;
+	volatile bool dacConvFlag 		= false;
+	volatile bool dacHalfConvFlag 	= false;
+	volatile bool i2cTxFlag 		= false;
+	volatile bool i2cRxFlag 		= false;
+	volatile bool uartRxFlag 		= false;
+	volatile uint8_t uartRxData 	= 0;
 
 };
 
