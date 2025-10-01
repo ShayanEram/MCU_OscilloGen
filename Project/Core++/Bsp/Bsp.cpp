@@ -191,10 +191,10 @@ Status Bsp::timStopDMA()
 	return convertHALStatus(HAL_TIM_Base_Stop_DMA(&htim2));
 }
 
-extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-	Bsp::getInstance().handleTimPeriodElapsed();
-}
+//extern "C" void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//	Bsp::getInstance().handleTimPeriodElapsed();
+//}
 
 //DAC----------------------------------------------------------------------------------------------------------------------------
 Status Bsp::dacStart_DMA(const uint32_t *pData, uint32_t Length)

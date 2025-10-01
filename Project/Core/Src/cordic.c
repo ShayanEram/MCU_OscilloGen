@@ -99,7 +99,7 @@ void HAL_CORDIC_MspInit(CORDIC_HandleTypeDef* cordicHandle)
     __HAL_LINKDMA(cordicHandle,hdmaOut,hdma_cordic_wr);
 
     /* CORDIC interrupt Init */
-    HAL_NVIC_SetPriority(CORDIC_IRQn, 0, 0);
+    HAL_NVIC_SetPriority(CORDIC_IRQn, 5, 0);
     HAL_NVIC_EnableIRQ(CORDIC_IRQn);
   /* USER CODE BEGIN CORDIC_MspInit 1 */
 

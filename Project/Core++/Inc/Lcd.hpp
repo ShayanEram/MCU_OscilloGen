@@ -14,6 +14,13 @@
 
 constexpr int16_t SLAVE_ADDRESS = 0x4E;
 
+enum class LcdMode
+{
+    None,
+    Generator,
+    Analyzer
+};
+
 class Lcd final {
 public:
 	explicit Lcd(Bsp& bsp, uint8_t address);
@@ -24,6 +31,7 @@ public:
     void setCursor(int col, int row);
     void sendString(const char* str);
     void sendChar(char ch);
+    void update(LcdMode mode);
 
 private:
     Bsp& _bsp;

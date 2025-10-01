@@ -31,6 +31,13 @@ extern "C"
 #include "gpio.h"
 }
 
+extern "C"
+{
+#include "FreeRTOS.h"
+#include "task.h"
+#include "cmsis_os.h"
+}
+
 using FunctionalCallback = std::function<void()>;
 
 class Bsp : public BspInterface {

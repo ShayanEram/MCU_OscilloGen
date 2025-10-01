@@ -2,25 +2,26 @@
  * @file MainCpp.cpp
  * @author Shayan Eram
  */
-#include "Bsp.hpp"
+
+//Includes**************************************
 #include "MainCpp.hpp"
-#include "main.h"
 
 #include "AnalyzerExtern.hpp"
-#include "Bootloader.hpp"
 #include "DacExtern.hpp"
 #include "FuncAnalyzer.hpp"
 #include "FuncGenerator.hpp"
 #include "Lcd.hpp"
 #include "SerialConnection.hpp"
 
+//Defines***************************************
 #define USE_EXTERN_ADC
 #define USE_EXTERN_DAC
 #define USE_CORDIC
 
-constexpr uint8_t Major_Version{1};
+constexpr uint8_t Major_Version{2};
 constexpr uint8_t Minor_Version{0};
 
+//Global Variables******************************
 Bsp& bsp = Bsp::getInstance(); // Singleton!
 
 FuncAnalyzer analyze(bsp);
@@ -36,109 +37,169 @@ AnalyzerExt exAnalyze(bsp);
 Dac exDac(bsp);
 #endif
 
+//Handles************************************
+osThreadId_t funcGeneratorTaskHandle;
+osThreadId_t funcAnalyzerTaskHandle;
+osThreadId_t lcdTaskHandle;
+osThreadId_t serialConnectionTaskHandle;
 
-__attribute__((noreturn)) void MainCpp()
+osMessageQueueId_t generatorQueue;
+osMessageQueueId_t analyzerQueue;
+osMessageQueueId_t lcdQueue;
+
+//Init Function*******************************
+extern "C" void System_Init(void)
+{
+	generatorQueue = osMessageQueueNew(4, sizeof(ReceivedData), NULL);
+	analyzerQueue  = osMessageQueueNew(4, sizeof(ReceivedData), NULL);
+	lcdQueue = osMessageQueueNew(4, sizeof(LcdMode), NULL);
+
+	bsp.watchdogStart();
+	bsp.registerDefaultCallbacks();
+}
+
+//RTOS Threads**********************************************************************
+extern "C" void SerialConnctionTask(void *argument)
+{
+	MX_USB_DEVICE_Init();
+
+	ReceivedData data;
+	bool dataReceived{false};
+	const uint32_t DELAY = 1000;
+	bool interface{false};
+
+	do
+	{
+		Status status = connection.interfaceHandshake(Major_Version, Minor_Version);
+
+		if (status == Status::OK)
+		{
+			interface = true;
+		}
+		osDelay(pdMS_TO_TICKS(1000));
+
+	} while (!interface);
+
+
+	while(true)
+	{
+		bsp.dispatchEvents(); // process callbacks
+
+		if (usbReceivedFlag)
+		{
+			data = connection.processReceivedData();
+			usbReceivedFlag = false;
+			dataReceived = true;
+
+			if (data.mode == FUNCTION_GENERATOR_MODE)
+			{
+				osMessageQueuePut(generatorQueue, &data, 0, 0);
+
+				LcdMode msg = LcdMode::Generator;
+				osMessageQueuePut(lcdQueue, &msg, 0, 0);
+			}
+			else if (data.mode == OSCILLOSCOPE_MODE)
+			{
+				osMessageQueuePut(analyzerQueue,  &data, 0, 0);
+
+				LcdMode msg = LcdMode::Analyzer;
+				osMessageQueuePut(lcdQueue, &msg, 0, 0);
+			}
+
+		}
+
+		bsp.watchdogRefresh();
+		osDelay(10);
+	}
+}
+
+extern "C" void FuncGeneratorTask(void *argument)
+{
+	ReceivedData data;
+
+	while(true)
+	{
+		if (osMessageQueueGet(generatorQueue, &data, NULL, osWaitForever) == osOK)
+		{
+			if (data.mode == FUNCTION_GENERATOR_MODE)
+			{
+				generate.selectWaveform(data.generate.signalType);
+				generate.setAmplitude(data.generate.amplitude);
+				generate.setFrequency(data.generate.frequency);
+				generate.generateWaveforms();
+				generate.startWaveformOutput();
+			}
+			else
+			{
+				generate.stopWaveformOutput();
+			}
+
+		}
+	}
+}
+
+extern "C" void FuncAnalyzerTask(void *argument)
+{
+	ReceivedData data;
+	float32_t fftOutput;
+
+	while(true)
+	{
+		if (osMessageQueueGet(analyzerQueue, &data, NULL, osWaitForever) == osOK)
+		{
+			if (data.mode == OSCILLOSCOPE_MODE)
+			{
+				if (data.analyze.stop)
+				{
+					analyze.stopAnalyzing();
+				}
+				else if (data.analyze.fft)
+				{
+					analyze.computeFFT(&fftOutput);
+
+					#ifdef USE_EXTERN_ADC
+                    	exAnalyze.requestFFT();
+                    #endif
+				}
+				else
+				{
+					analyze.startAnalysing();
+				}
+			}
+		}
+	}
+}
+
+extern "C" __attribute__((noreturn)) void LcdTask(void *argument)
 {
 
-//	bsp.registerDefaultCallbacks();
-//
-//	ReceivedData data;
-//	bool dataReceived{false};
-//	float32_t fftOutput;
-//	const uint32_t DELAY = 1000;
-//
-//
-//	bool interface{false};
-//	do
-//	{
-//		Status status = connection.interfaceHandshake(Major_Version, Minor_Version);
-//		if (status == Status::OK) {
-//			interface = true;
-//		}
-//		bsp.delay(DELAY);
-//
-//	} while (!interface);
-//
-//
-//	lcd.init();
-//	lcd.sendString("LCD Online");
-//
-//	bsp.watchdogStart();
-//
-//	while(true)
-//	{
-//		bsp.dispatchEvents(); // process callbacks
-//
-//		if(usbReceivedFlag)
-//		{
-//			data = connection.processReceivedData();
-//			usbReceivedFlag = false;
-//			dataReceived = true;
-//
-//			if(data.mode == FUNCTION_GENERATOR_MODE)
-//			{
-//				generate.selectWaveform(data.generate.signalType);
-//				generate.setAmplitude(data.generate.amplitude);
-//				generate.setFrequency(data.generate.amplitude);
-//				generate.generateWaveforms();
-//				generate.startWaveformOutput();
-//			}
-//			else if(data.mode == OSCILLOSCOPE_MODE)
-//			{
-//				generate.stopWaveformOutput();
-//
-//				#ifdef USE_EXTERN_DAC
-//				exDac.noOperation();
-//				#endif
-//
-//				analyze.startAnalysing();
-//			}
-//			else if(data.mode == UPDATE_MODE)
-//			{
-//				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
-//				dataReceived = false;
-//			}
-//			else
-//			{
-//				printf("DEV_ERROR: Incorrect mode selected!\n");
-//				dataReceived = false;
-//			}
-//		}
-//		else if(dataReceived)
-//		{
-//			if(data.mode == FUNCTION_GENERATOR_MODE)
-//			{
-//				generate.startWaveformOutput();
-//
-//				#ifdef USE_EXTERN_DAC
-//				exDac.voltageToCode(3.3, -6, 6);
-//				#endif
-//			}
-//			else if(data.mode == OSCILLOSCOPE_MODE)
-//			{
-//				if(data.analyze.stop)
-//				{
-//					analyze.stopAnalyzing();
-//				}
-//				else if(data.analyze.fft)
-//				{
-//					analyze.computeFFT(&fftOutput);
-//
-//					#ifdef USE_EXTERN_ADC
-//					exAnalyze.requestFFT();
-//					#endif
-//				}
-//			}
-//			else if(data.mode == UPDATE_MODE)
-//			{
-//				printf("DEV_ERROR: UPDATE Mode not implemented!\n");
-//			}
-//			else
-//			{
-//				printf("DEV_ERROR: Incorrect mode selected!\n");
-//			}
-//		}
-//
-//		bsp.watchdogRefresh();
-//	}
+	lcd.init();
+	lcd.sendString("LCD Online");
+
+	LcdMode mode;
+
+	while(true)
+	{
+		if (osMessageQueueGet(lcdQueue, &mode, NULL, osWaitForever) == osOK)
+		{
+			lcd.update(mode);
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

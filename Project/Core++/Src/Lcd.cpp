@@ -78,4 +78,21 @@ void Lcd::sendChar(char ch) {
     sendData(ch);
 }
 
+void Lcd::update(LcdMode mode)
+{
+	clear();
+	switch (mode)
+	{
+		case LcdMode::Generator:
+			sendString("Mode: Generator");
+			break;
+		case LcdMode::Analyzer:
+			sendString("Mode: Analyzer");
+			break;
+		default:
+			sendString("LCD Online");
+			break;
+	}
+}
+
 
