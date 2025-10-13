@@ -79,7 +79,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-
+  dfu_boot_flag = (uint32_t*) (&_bflag); // set in linker script for bootloader
   /* USER CODE END 1 */
 
   /* MPU Configuration--------------------------------------------------------*/

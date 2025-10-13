@@ -63,7 +63,10 @@ void Error_Handler(void);
 #define SWCLK_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
-
+// Bootloader variables
+#define DFU_BOOT_FLAG 0xDEADBEEF
+extern int _bflag;
+uint32_t *dfu_boot_flag;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
