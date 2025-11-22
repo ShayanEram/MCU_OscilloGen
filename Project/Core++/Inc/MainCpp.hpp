@@ -8,12 +8,6 @@
 #ifndef INC_MAINCPP_HPP_
 #define INC_MAINCPP_HPP_
 
-// INCLUDES
-extern "C"
-{
-#include "main.h"
-}
-
 #include "Bsp.hpp"
 
 #ifdef __cplusplus
